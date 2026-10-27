@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { UI, tr, useLang, type L } from '../i18n'
 import { ARTICLES, LAW_NAMES } from '../data/laws'
 import type { Role } from '../App'
+import { Icon } from '../icons'
 
 interface Msg {
   role: 'user' | 'assistant'
@@ -130,7 +131,7 @@ export default function Chat({ role, openArticle }: { role: Role; openArticle: (
           maxLength={1000}
           autoComplete="off"
         />
-        <button className="send" type="submit" disabled={busy || !input.trim()} aria-label={tr(UI.send, lang)}>➤</button>
+        <button className="send" type="submit" disabled={busy || !input.trim()} aria-label={tr(UI.send, lang)}><Icon name="send" size={22} /></button>
       </form>
       {msgs.length > 0 && (
         <button className="linklike" onClick={() => setMsgs([])}>{tr(UI.newChat, lang)}</button>

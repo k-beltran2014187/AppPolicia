@@ -7,6 +7,7 @@ import Record from './views/Record'
 import Help from './views/Help'
 import Report from './views/Report'
 import Chat from './views/Chat'
+import { Icon, type IconName } from './icons'
 
 export type Role = 'civil' | 'officer'
 
@@ -48,20 +49,20 @@ export default function App() {
   else if (kind === 'report') page = <Report />
   else page = <Home role={role} setRole={setRole} go={go} />
 
-  const tabs: [string, string, string][] = [
-    ['home', '🏠', tr(UI.home, lang)],
-    ['chat', '💬', tr(UI.chat, lang)],
-    ['laws', '⚖️', tr(UI.laws, lang)],
-    ['record', '🎥', tr(UI.record, lang)],
-    ['help', '📞', tr(UI.help, lang)],
+  const tabs: [string, IconName, string][] = [
+    ['home', 'home', tr(UI.home, lang)],
+    ['chat', 'chat', tr(UI.chat, lang)],
+    ['laws', 'laws', tr(UI.laws, lang)],
+    ['record', 'record', tr(UI.record, lang)],
+    ['help', 'help', tr(UI.help, lang)],
   ]
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>
       <header className="top">
         <div className="brand">
-          {kind !== 'home' && <button className="back" onClick={() => window.history.back()} aria-label={tr(UI.back, lang)}>‹</button>}
-          <span className="logo">🛡️ {UI.appName[lang]}</span>
+          {kind !== 'home' && <button className="back" onClick={() => window.history.back()} aria-label={tr(UI.back, lang)}><Icon name="back" size={26} /></button>}
+          <span className="logo"><span className="logo-mark"><Icon name="shield" size={18} /></span>{UI.appName[lang]}</span>
         </div>
         <button className="lang" onClick={() => setLang(lang === 'es' ? 'en' : 'es')} aria-label={tr(UI.language, lang)}>
           {lang === 'es' ? 'EN' : 'ES'}
@@ -71,7 +72,7 @@ export default function App() {
       <nav className="tabs">
         {tabs.map(([id, ico, label]) => (
           <button key={id} className={tab === id ? 'on' : ''} onClick={() => go(id)}>
-            <span>{ico}</span>
+            <span className="tab-ico"><Icon name={ico} size={22} /></span>
             <small>{label}</small>
           </button>
         ))}
@@ -79,7 +80,7 @@ export default function App() {
       {!ack && (
         <div className="modal" role="dialog" aria-modal="true">
           <div className="modal-box">
-            <h2>⚠️ {tr(UI.disclaimerTitle, lang)}</h2>
+            <h2 className="row-ico"><Icon name="alert" /> {tr(UI.disclaimerTitle, lang)}</h2>
             <p>{tr(UI.disclaimer, lang)}</p>
             <button className="big" onClick={() => { setAck(true); write('poligt:ack', '1') }}>{tr(UI.accept, lang)}</button>
           </div>

@@ -17,7 +17,7 @@ export default function Laws({ focus }: { focus?: string }) {
 
   return (
     <div className="stack">
-      <h1>⚖️ {tr(UI.laws, lang)}</h1>
+      <h1>{tr(UI.laws, lang)}</h1>
       <input className="field" type="search" placeholder={tr(UI.searchLaws, lang)} value={q} onChange={(e) => setQ(e.target.value)} />
       {items.map((a) => {
         const law = LAW_NAMES[a.law]

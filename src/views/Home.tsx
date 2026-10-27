@@ -1,6 +1,7 @@
 import { UI, tr, useLang } from '../i18n'
 import { SCENARIOS } from '../data/scenarios'
 import type { Role } from '../App'
+import { Icon } from '../icons'
 
 interface Props {
   role: Role
@@ -15,16 +16,17 @@ export default function Home({ role, setRole, go }: Props) {
       <p className="tagline">{tr(UI.tagline, lang)}</p>
       <div className="seg" role="tablist" aria-label={tr(UI.iAm, lang)}>
         <button className={role === 'civil' ? 'on' : ''} onClick={() => setRole('civil')}>
-          🧑 {tr(UI.civil, lang)}
+          <Icon name="user" size={18} /> {tr(UI.civil, lang)}
         </button>
         <button className={role === 'officer' ? 'on' : ''} onClick={() => setRole('officer')}>
-          👮 {tr(UI.officer, lang)}
+          <Icon name="badge" size={18} /> {tr(UI.officer, lang)}
         </button>
       </div>
 
       <button className="sos" onClick={() => go('chat')}>
-        <span className="sos-title">💬 {tr(UI.askBtn, lang)}</span>
+        <span className="sos-title">{tr(UI.askBtn, lang)}</span>
         <span className="sos-sub">{tr(UI.askSub, lang)}</span>
+        <span className="sos-go"><Icon name="arrow" size={24} /></span>
       </button>
       <button className="btn" onClick={() => go('s:alto')}>
         {role === 'civil' ? tr(UI.stoppedBtn, lang) : tr(UI.officerBtn, lang)} · {tr(UI.stoppedSub, lang)}
@@ -34,7 +36,7 @@ export default function Home({ role, setRole, go }: Props) {
       <div className="grid">
         {SCENARIOS.map((s) => (
           <button key={s.id} className="card" onClick={() => go(`s:${s.id}`)}>
-            <span className="ico">{s.icon}</span>
+            <span className="ico-circle"><Icon name={s.icon} size={22} /></span>
             <span>{tr(s.title, lang)}</span>
           </button>
         ))}
@@ -42,10 +44,10 @@ export default function Home({ role, setRole, go }: Props) {
 
       <h2>{tr(UI.tools, lang)}</h2>
       <div className="grid">
-        <button className="card" onClick={() => go('record')}><span className="ico">🎥</span><span>{tr(UI.record, lang)}</span></button>
-        <button className="card" onClick={() => go('help')}><span className="ico">📞</span><span>{tr(UI.help, lang)}</span></button>
-        <button className="card" onClick={() => go('report')}><span className="ico">📝</span><span>{tr(UI.report, lang)}</span></button>
-        <button className="card" onClick={() => go('laws')}><span className="ico">⚖️</span><span>{tr(UI.laws, lang)}</span></button>
+        <button className="card" onClick={() => go('record')}><span className="ico-circle"><Icon name="record" size={22} /></span><span>{tr(UI.record, lang)}</span></button>
+        <button className="card" onClick={() => go('help')}><span className="ico-circle"><Icon name="help" size={22} /></span><span>{tr(UI.help, lang)}</span></button>
+        <button className="card" onClick={() => go('report')}><span className="ico-circle"><Icon name="report" size={22} /></span><span>{tr(UI.report, lang)}</span></button>
+        <button className="card" onClick={() => go('laws')}><span className="ico-circle"><Icon name="laws" size={22} /></span><span>{tr(UI.laws, lang)}</span></button>
       </div>
       <p className="muted small">{tr(UI.installTip, lang)}</p>
     </div>

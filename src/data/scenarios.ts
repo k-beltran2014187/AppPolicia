@@ -1,4 +1,5 @@
 import type { L } from '../i18n'
+import type { IconName } from '../icons'
 
 export interface Point {
   text: L
@@ -7,7 +8,7 @@ export interface Point {
 
 export interface Scenario {
   id: string
-  icon: string
+  icon: IconName
   title: L
   intro: L
   checklist: Point[]
@@ -20,7 +21,7 @@ export interface Scenario {
 export const SCENARIOS: Scenario[] = [
   {
     id: 'alto',
-    icon: '🚓',
+    icon: 'siren',
     title: { es: 'Me pararon / retén', en: 'Traffic stop / checkpoint' },
     intro: {
       es: 'Mantén la calma, baja la velocidad, orilla el vehículo con señalización y mantén las manos visibles.',
@@ -60,7 +61,7 @@ export const SCENARIOS: Scenario[] = [
   },
   {
     id: 'registro',
-    icon: '🔎',
+    icon: 'search',
     title: { es: 'Revisión de vehículo o de mi persona', en: 'Vehicle or personal search' },
     intro: {
       es: 'Un registro solo es legal con causa justificada y cumpliendo requisitos de uniforme, sexo del agente y respeto.',
@@ -96,7 +97,7 @@ export const SCENARIOS: Scenario[] = [
   },
   {
     id: 'detencion',
-    icon: '⛓️',
+    icon: 'lock',
     title: { es: 'Me quieren detener / capturar', en: 'I am being detained / arrested' },
     intro: {
       es: 'Una detención solo es legal con orden de juez o en flagrancia. No te resistas: tus derechos se hacen valer por la vía legal.',
@@ -134,7 +135,7 @@ export const SCENARIOS: Scenario[] = [
   },
   {
     id: 'multas',
-    icon: '🧾',
+    icon: 'receipt',
     title: { es: 'Multas, boletas y retención', en: 'Fines, tickets and retention' },
     intro: {
       es: 'Conoce qué puede retener la autoridad, cuándo y cómo se paga y se impugna una multa.',

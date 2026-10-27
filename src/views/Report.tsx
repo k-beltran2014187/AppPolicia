@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { UI, tr, useLang, type L } from '../i18n'
+import { Icon } from '../icons'
 
 const FIELDS: { key: string; label: L; multiline?: boolean }[] = [
   { key: 'when', label: { es: 'Fecha y hora', en: 'Date and time' } },
@@ -50,7 +51,7 @@ export default function Report() {
 
   return (
     <div className="stack">
-      <h1>📝 {tr(UI.reportTitle, lang)}</h1>
+      <h1>{tr(UI.reportTitle, lang)}</h1>
       <p className="lead">{tr(UI.reportHint, lang)}</p>
       {FIELDS.map((f) => (
         <label key={f.key} className="lbl">
@@ -62,7 +63,7 @@ export default function Report() {
           )}
         </label>
       ))}
-      <button className="big" onClick={pdf}>📄 {tr(UI.makePdf, lang)}</button>
+      <button className="big" onClick={pdf}><Icon name="download" size={20} /> {tr(UI.makePdf, lang)}</button>
       <button className="btn danger" onClick={clear}>{tr(UI.clear, lang)}</button>
     </div>
   )

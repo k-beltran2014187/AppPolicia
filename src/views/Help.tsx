@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { UI, tr, useLang, type L } from '../i18n'
+import { Icon } from '../icons'
 
 const CONTACTS: { name: L; desc: L; tel: string }[] = [
   { name: { es: 'PNC – Emergencias', en: 'PNC – Emergencies' }, desc: { es: 'Delitos en curso, violencia, asaltos', en: 'Crimes in progress, violence, robberies' }, tel: '110' },
@@ -34,9 +35,9 @@ export default function Help() {
 
   return (
     <div className="stack">
-      <h1>📞 {tr(UI.help, lang)}</h1>
+      <h1>{tr(UI.help, lang)}</h1>
       <section className="panel">
-        <h2>📍 {tr(UI.shareLoc, lang)}</h2>
+        <h2 className="row-ico"><Icon name="pin" /> {tr(UI.shareLoc, lang)}</h2>
         <p className="muted">{tr(UI.shareLocSub, lang)}</p>
         <label className="small">{tr(UI.trusted, lang)}</label>
         <input className="field" inputMode="tel" placeholder={tr(UI.trustedHint, lang)} value={trusted} onChange={(e) => saveTrusted(e.target.value)} />
@@ -53,7 +54,7 @@ export default function Help() {
           <a className="btn" href={`tel:${c.tel}`}>{tr(UI.call, lang)}</a>
         </div>
       ))}
-      <p className="small muted">⚠️ {tr(UI.verifyNumber, lang)}</p>
+      <p className="small muted row-ico"><Icon name="alert" size={16} /> {tr(UI.verifyNumber, lang)}</p>
     </div>
   )
 }

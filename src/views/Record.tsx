@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { UI, tr, useLang } from '../i18n'
+import { Icon } from '../icons'
 import { deleteRecording, listRecordings, saveRecording, type Recording } from '../db'
 
 export default function Record() {
@@ -50,7 +51,7 @@ export default function Record() {
 
   return (
     <div className="stack">
-      <h1>🎥 {tr(UI.record, lang)}</h1>
+      <h1>{tr(UI.record, lang)}</h1>
       <p className="lead">{tr(UI.recNote, lang)}</p>
       <div className="seg">
         <button disabled={rec} className={kind === 'video' ? 'on' : ''} onClick={() => setKind('video')}>{tr(UI.recVideo, lang)}</button>
@@ -59,7 +60,7 @@ export default function Record() {
       <video ref={preview} className={rec && kind === 'video' ? 'preview' : 'hidden'} autoPlay muted playsInline />
       {err && <p className="error">{tr(UI.recDenied, lang)}</p>}
       <button className={`big ${rec ? 'stop' : ''}`} onClick={rec ? stop : start}>
-        {rec ? `⏹ ${tr(UI.recStop, lang)}` : `⏺ ${tr(UI.recStart, lang)}`}
+        {rec ? <><Icon name="stop" size={20} fill="currentColor" /> {tr(UI.recStop, lang)}</> : <><Icon name="rec" size={20} fill="currentColor" /> {tr(UI.recStart, lang)}</>}
       </button>
       <h2>{tr(UI.recSaved, lang)}</h2>
       {items.length === 0 && <p className="muted">{tr(UI.recEmpty, lang)}</p>}

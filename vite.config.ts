@@ -14,8 +14,8 @@ export default defineConfig({
         short_name: 'PoliGT',
         description: 'Conoce tus derechos y deberes en una parada de la PNC o EMETRA',
         lang: 'es',
-        theme_color: '#1565c0',
-        background_color: '#f4f7fb',
+        theme_color: '#9fe870',
+        background_color: '#e8ebe6',
         display: 'standalone',
         start_url: './',
         icons: [
