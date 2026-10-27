@@ -32,7 +32,18 @@ function localSearch(q: string): string[] {
 }
 
 function renderText(text: string) {
-  return text.replace(/\[\[[a-z0-9-]+\]\]/g, '').replace(/ +\n/g, '\n').trim()
+  return text.replace(/\[\[[a-z0-9-]+\]\]/g, '').replace(/ +\n/g, '\n').replace(/ +([.,;:])/g, '$1').trim()
+}
+
+/** Muestra **negrita** sin interpretar otro HTML. */
+function Rich({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+        part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part,
+      )}
+    </>
+  )
 }
 
 export default function Chat({ role, openArticle }: { role: Role; openArticle: (id: string) => void }) {
@@ -95,7 +106,7 @@ export default function Chat({ role, openArticle }: { role: Role; openArticle: (
         {msgs.map((m, i) => (
           <div key={i} className={`bubble ${m.role}`}>
             {m.offline && <span className="tag pend">{tr(UI.offlineTag, lang)}</span>}
-            <p className="pre">{m.content}</p>
+            <p className="pre"><Rich text={m.content} /></p>
             {m.cites?.map((id) => {
               const a = ARTICLES.find((x) => x.id === id)
               return a ? (
