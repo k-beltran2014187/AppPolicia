@@ -1,0 +1,50 @@
+import { UI, tr, useLang } from '../i18n'
+import { SCENARIOS } from '../data/scenarios'
+import type { Role } from '../App'
+
+interface Props {
+  role: Role
+  setRole: (r: Role) => void
+  go: (v: string) => void
+}
+
+export default function Home({ role, setRole, go }: Props) {
+  const { lang } = useLang()
+  return (
+    <div className="stack">
+      <p className="tagline">{tr(UI.tagline, lang)}</p>
+      <div className="seg" role="tablist" aria-label={tr(UI.iAm, lang)}>
+        <button className={role === 'civil' ? 'on' : ''} onClick={() => setRole('civil')}>
+          🧑 {tr(UI.civil, lang)}
+        </button>
+        <button className={role === 'officer' ? 'on' : ''} onClick={() => setRole('officer')}>
+          👮 {tr(UI.officer, lang)}
+        </button>
+      </div>
+
+      <button className="sos" onClick={() => go(`s:alto`)}>
+        <span className="sos-title">{role === 'civil' ? tr(UI.stoppedBtn, lang) : tr(UI.officerBtn, lang)}</span>
+        <span className="sos-sub">{tr(UI.stoppedSub, lang)}</span>
+      </button>
+
+      <h2>{tr(UI.situations, lang)}</h2>
+      <div className="grid">
+        {SCENARIOS.map((s) => (
+          <button key={s.id} className="card" onClick={() => go(`s:${s.id}`)}>
+            <span className="ico">{s.icon}</span>
+            <span>{tr(s.title, lang)}</span>
+          </button>
+        ))}
+      </div>
+
+      <h2>{tr(UI.tools, lang)}</h2>
+      <div className="grid">
+        <button className="card" onClick={() => go('record')}><span className="ico">🎥</span><span>{tr(UI.record, lang)}</span></button>
+        <button className="card" onClick={() => go('help')}><span className="ico">📞</span><span>{tr(UI.help, lang)}</span></button>
+        <button className="card" onClick={() => go('report')}><span className="ico">📝</span><span>{tr(UI.report, lang)}</span></button>
+        <button className="card" onClick={() => go('laws')}><span className="ico">⚖️</span><span>{tr(UI.laws, lang)}</span></button>
+      </div>
+      <p className="muted small">{tr(UI.installTip, lang)}</p>
+    </div>
+  )
+}
