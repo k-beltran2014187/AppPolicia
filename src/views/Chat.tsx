@@ -3,6 +3,7 @@ import { UI, tr, useLang, type L } from '../i18n'
 import { ARTICLES, LAW_NAMES } from '../data/laws'
 import type { Role } from '../App'
 import { Icon } from '../icons'
+import Mike from '../Mike'
 
 interface Msg {
   role: 'user' | 'assistant'
@@ -47,7 +48,7 @@ function Rich({ text }: { text: string }) {
   )
 }
 
-export default function Chat({ role, openArticle }: { role: Role; openArticle: (id: string) => void }) {
+export default function Chat({ role, openArticle, onLawyer }: { role: Role; openArticle: (id: string) => void; onLawyer: () => void }) {
   const { lang } = useLang()
   const [msgs, setMsgs] = useState<Msg[]>(() => {
     try { return JSON.parse(localStorage.getItem(STORE) ?? '[]') } catch { return [] }
@@ -95,6 +96,14 @@ export default function Chat({ role, openArticle }: { role: Role; openArticle: (
 
   return (
     <div className="chat">
+      <div className="mike-head">
+        <Mike size={48} />
+        <div>
+          <strong>Mike</strong>
+          <span className="small muted">{tr(UI.mikeRole, lang)}</span>
+        </div>
+        <button className="btn small-btn" onClick={onLawyer}>{tr(UI.realLawyer, lang)}</button>
+      </div>
       <div className="chat-log">
         {msgs.length === 0 && (
           <div className="stack">
@@ -106,6 +115,7 @@ export default function Chat({ role, openArticle }: { role: Role; openArticle: (
         )}
         {msgs.map((m, i) => (
           <div key={i} className={`bubble ${m.role}`}>
+            {m.role === 'assistant' && <span className="bubble-who"><Mike size={20} /> Mike</span>}
             {m.offline && <span className="tag pend">{tr(UI.offlineTag, lang)}</span>}
             <p className="pre"><Rich text={m.content} /></p>
             {m.cites?.map((id) => {
@@ -118,7 +128,7 @@ export default function Chat({ role, openArticle }: { role: Role; openArticle: (
             })}
           </div>
         ))}
-        {busy && <div className="bubble assistant"><span className="dots">{tr(UI.thinking, lang)}</span></div>}
+        {busy && <div className="bubble assistant"><span className="bubble-who"><Mike size={20} /> Mike</span><span className="dots">{tr(UI.thinking, lang)}</span></div>}
         <div ref={end} />
       </div>
       <form className="chat-input" onSubmit={(e) => { e.preventDefault(); send(input) }}>
@@ -133,6 +143,7 @@ export default function Chat({ role, openArticle }: { role: Role; openArticle: (
         />
         <button className="send" type="submit" disabled={busy || !input.trim()} aria-label={tr(UI.send, lang)}><Icon name="send" size={22} /></button>
       </form>
+      <p className="small muted center">{tr(UI.notLawyer, lang)}</p>
       {msgs.length > 0 && (
         <button className="linklike" onClick={() => setMsgs([])}>{tr(UI.newChat, lang)}</button>
       )}

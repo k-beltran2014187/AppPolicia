@@ -42,7 +42,7 @@ export default function App() {
 
   let page
   if (kind === 's') page = <Scenario id={arg} role={role} openArticle={(id) => go(`laws:${id}`)} />
-  else if (kind === 'chat') page = <Chat role={role} openArticle={(id) => go(`laws:${id}`)} />
+  else if (kind === 'chat') page = <Chat role={role} openArticle={(id) => go(`laws:${id}`)} onLawyer={() => go('help')} />
   else if (kind === 'laws') page = <Laws key={arg} focus={arg} />
   else if (kind === 'record') page = <Record />
   else if (kind === 'help') page = <Help />

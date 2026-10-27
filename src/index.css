@@ -109,3 +109,12 @@ video, audio { width: 100%; border-radius: var(--r-sm); } .preview { background:
 .modal { position: fixed; inset: 0; background: rgba(14,15,12,.6); display: grid; place-items: center; padding: 20px; z-index: 20; }
 .modal-box { background: var(--card); border-radius: var(--r); padding: 24px 20px; max-width: 420px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 32px rgba(14,15,12,.25); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* Mike */
+.mike { flex: none; display: block; }
+.mike-head { display: flex; align-items: center; gap: 12px; background: var(--card); border-radius: var(--r); padding: 12px 14px; }
+.mike-head > div { display: flex; flex-direction: column; flex: 1; min-width: 0; line-height: 1.2; }
+.small-btn { min-height: 40px; padding: 6px 12px; font-size: .8125rem; border-radius: 999px; flex: none; max-width: 42%; line-height: 1.15; }
+.bubble-who { display: flex; align-items: center; gap: 6px; font-size: .75rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+.center { text-align: center; margin: 0; }
+.sos-who { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: .9rem; }
