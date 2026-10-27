@@ -6,6 +6,7 @@ import Laws from './views/Laws'
 import Record from './views/Record'
 import Help from './views/Help'
 import Report from './views/Report'
+import Chat from './views/Chat'
 
 export type Role = 'civil' | 'officer'
 
@@ -40,6 +41,7 @@ export default function App() {
 
   let page
   if (kind === 's') page = <Scenario id={arg} role={role} openArticle={(id) => go(`laws:${id}`)} />
+  else if (kind === 'chat') page = <Chat role={role} openArticle={(id) => go(`laws:${id}`)} />
   else if (kind === 'laws') page = <Laws key={arg} focus={arg} />
   else if (kind === 'record') page = <Record />
   else if (kind === 'help') page = <Help />
@@ -48,10 +50,10 @@ export default function App() {
 
   const tabs: [string, string, string][] = [
     ['home', '🏠', tr(UI.home, lang)],
+    ['chat', '💬', tr(UI.chat, lang)],
     ['laws', '⚖️', tr(UI.laws, lang)],
     ['record', '🎥', tr(UI.record, lang)],
     ['help', '📞', tr(UI.help, lang)],
-    ['report', '📝', tr(UI.report, lang)],
   ]
 
   return (

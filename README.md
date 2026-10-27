@@ -30,3 +30,12 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Chat con IA (agente)
+La pestaña **Chat** llama a `api/chat.js` (función de Vercel), que guarda la llave y le entrega al modelo la biblioteca de artículos como único conocimiento legal. Sin conexión o si falla, el chat busca en la biblioteca local.
+
+1. Importa el repo en Vercel (detecta Vite solo).
+2. Agrega la variable `ANTHROPIC_API_KEY`.
+3. Despliega. Para probar local: `npx vercel dev`.
+
+`npm run knowledge` regenera `api/knowledge.js` desde `src/data/laws.ts` (también corre en `npm run build`). Límites básicos: 12 mensajes/minuto por IP, 700 tokens por respuesta; para producción conviene un límite persistente.

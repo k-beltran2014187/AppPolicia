@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": { "node": ">=22.18" },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "knowledge": "node scripts/gen-knowledge.mjs",
+    "build": "node scripts/gen-knowledge.mjs && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },

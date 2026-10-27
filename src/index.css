@@ -65,3 +65,16 @@ video, audio { width: 100%; border-radius: 12px; } .preview { background: #000; 
 .tabs button.on { color: var(--brand); font-weight: 700; } .tabs span { font-size: 1.3rem; }
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: grid; place-items: center; padding: 20px; z-index: 20; }
 .modal-box { background: var(--card); border-radius: 20px; padding: 20px; max-width: 420px; display: flex; flex-direction: column; gap: 10px; }
+
+.chat { display: flex; flex-direction: column; gap: 10px; min-height: calc(100vh - 190px); }
+.chat-log { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.bubble { max-width: 92%; padding: 10px 14px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); }
+.bubble.user { align-self: flex-end; background: var(--brand); color: #fff; border-color: var(--brand); border-bottom-right-radius: 6px; }
+.bubble.assistant { align-self: flex-start; border-bottom-left-radius: 6px; }
+.bubble .pre { white-space: pre-wrap; margin: 0 0 6px; }
+.suggest { text-align: left; background: var(--card); border: 1px solid var(--brand); color: var(--brand); border-radius: 14px; padding: 12px 14px; font-weight: 600; }
+.chat-input { position: sticky; bottom: 72px; display: flex; gap: 8px; padding: 8px 0; background: var(--bg); }
+.send { border: 0; border-radius: 14px; width: 52px; background: var(--brand); color: #fff; font-size: 1.2rem; }
+.send:disabled { opacity: .45; }
+.linklike { background: none; border: 0; color: var(--muted); text-decoration: underline; align-self: center; font-size: .85rem; }
+.dots { color: var(--muted); font-style: italic; }

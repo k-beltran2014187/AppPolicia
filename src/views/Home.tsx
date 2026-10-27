@@ -22,9 +22,12 @@ export default function Home({ role, setRole, go }: Props) {
         </button>
       </div>
 
-      <button className="sos" onClick={() => go(`s:alto`)}>
-        <span className="sos-title">{role === 'civil' ? tr(UI.stoppedBtn, lang) : tr(UI.officerBtn, lang)}</span>
-        <span className="sos-sub">{tr(UI.stoppedSub, lang)}</span>
+      <button className="sos" onClick={() => go('chat')}>
+        <span className="sos-title">💬 {tr(UI.askBtn, lang)}</span>
+        <span className="sos-sub">{tr(UI.askSub, lang)}</span>
+      </button>
+      <button className="btn" onClick={() => go('s:alto')}>
+        {role === 'civil' ? tr(UI.stoppedBtn, lang) : tr(UI.officerBtn, lang)} · {tr(UI.stoppedSub, lang)}
       </button>
 
       <h2>{tr(UI.situations, lang)}</h2>

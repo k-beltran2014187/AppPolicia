@@ -14,6 +14,17 @@ export const useLang = () => useContext(LangContext)
 export const tr = (l: L, lang: Lang) => l[lang]
 
 export const UI = {
+  chat: { es: 'Chat', en: 'Chat' },
+  chatIntro: { es: 'Cuéntame qué está pasando y te digo qué artículos aplican. Prueba con una de estas:', en: 'Tell me what is happening and I will tell you which articles apply. Try one of these:' },
+  chatPlaceholder: { es: 'Escribe qué está pasando…', en: 'Type what is happening…' },
+  send: { es: 'Enviar', en: 'Send' },
+  thinking: { es: 'Revisando la ley…', en: 'Checking the law…' },
+  newChat: { es: 'Nueva conversación', en: 'New conversation' },
+  askBtn: { es: 'Pregúntale a PoliGT', en: 'Ask PoliGT' },
+  askSub: { es: 'Cuéntale qué pasa y te cita los artículos', en: 'Tell it what is happening and get the articles' },
+  offlineTag: { es: 'Sin conexión: búsqueda local', en: 'Offline: local search' },
+  offlineFound: { es: 'No pude conectar con el asistente. Estos artículos guardados en tu teléfono son los más relacionados. Tócalos para leerlos:', en: 'Could not reach the assistant. These articles saved on your phone are the closest matches. Tap to read them:' },
+  offlineNone: { es: 'No pude conectar con el asistente y no encontré artículos relacionados. Revisa la sección Leyes o las guías de Inicio.', en: 'Could not reach the assistant and found no related articles. Check the Laws section or the guides on Home.' },
   appName: { es: 'PoliGT', en: 'PoliGT' },
   tagline: {
     es: 'Conoce tus derechos y deberes en una parada de la PNC o EMETRA',
