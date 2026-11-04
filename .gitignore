@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generado por npm run knowledge / build
+api/knowledge.js
+.vercel

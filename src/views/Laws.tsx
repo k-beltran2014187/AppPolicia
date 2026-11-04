@@ -1,24 +1,40 @@
 import { useMemo, useState } from 'react'
 import { UI, tr, useLang } from '../i18n'
-import { ARTICLES, LAW_NAMES } from '../data/laws'
+import { ARTICLES, LAW_NAMES, type Law } from '../data/laws'
+import { norm } from '../search'
+import { Icon } from '../icons'
 
 export default function Laws({ focus }: { focus?: string }) {
   const { lang } = useLang()
   const [q, setQ] = useState('')
   const [open, setOpen] = useState<string | undefined>(focus)
 
+  const [law, setLaw] = useState<Law | 'all'>(() => (focus ? (ARTICLES.find((a) => a.id === focus)?.law ?? 'all') : 'all'))
+
   const items = useMemo(() => {
-    const n = q.trim().toLowerCase()
-    if (!n) return ARTICLES
-    return ARTICLES.filter((a) =>
-      [a.art, LAW_NAMES[a.law].short, a.title.es, a.title.en, a.summary.es, a.summary.en].join(' ').toLowerCase().includes(n),
-    )
-  }, [q])
+    const n = norm(q.trim())
+    return ARTICLES.filter((a) => {
+      if (law !== 'all' && a.law !== law) return false
+      if (!n) return true
+      return norm([a.art, LAW_NAMES[a.law].short, a.title.es, a.title.en, a.summary.es, a.summary.en, a.quote ?? ''].join(' ')).includes(n)
+    })
+  }, [q, law])
+
+  const laws = Object.keys(LAW_NAMES) as Law[]
 
   return (
     <div className="stack">
       <h1>{tr(UI.laws, lang)}</h1>
-      <input className="field" type="search" placeholder={tr(UI.searchLaws, lang)} value={q} onChange={(e) => setQ(e.target.value)} />
+      <p className="public-note"><Icon name="shield" size={16} /> {tr(UI.publicLaws, lang)}</p>
+      <div className="filters" role="group" aria-label={tr(UI.laws, lang)}>
+        <button className={law === 'all' ? 'on' : ''} onClick={() => setLaw('all')} aria-pressed={law === 'all'}>{tr(UI.allLaws, lang)} · {ARTICLES.length}</button>
+        {laws.map((l) => (
+          <button key={l} className={law === l ? 'on' : ''} onClick={() => setLaw(l)} aria-pressed={law === l}>
+            {LAW_NAMES[l].short} · {ARTICLES.filter((a) => a.law === l).length}
+          </button>
+        ))}
+      </div>
+      <input className="field" type="search" aria-label={tr(UI.searchLaws, lang)} placeholder={tr(UI.searchLaws, lang)} value={q} onChange={(e) => setQ(e.target.value)} />
       {items.map((a) => {
         const law = LAW_NAMES[a.law]
         const isOpen = open === a.id

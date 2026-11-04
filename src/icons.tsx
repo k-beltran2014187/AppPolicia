@@ -1,7 +1,7 @@
 import {
   Home, MessageCircle, Scale, Video, Phone, FileText, ShieldCheck, Siren, Search, Lock, Receipt,
   Check, X, TriangleAlert, SendHorizontal, MapPin, UserRound, BadgeCheck, Circle, Square, Download,
-  ChevronLeft, ArrowRight, Quote, Gavel, ListChecks, ThumbsUp, type LucideProps,
+  ChevronLeft, ArrowRight, Quote, Gavel, ListChecks, ThumbsUp, LogOut, PhoneCall, Menu, Camera, Mic, Plus, Volume2, VolumeX, SquarePen, type LucideProps,
 } from 'lucide-react'
 
 export const ICONS = {
@@ -9,7 +9,8 @@ export const ICONS = {
   shield: ShieldCheck, siren: Siren, search: Search, lock: Lock, receipt: Receipt, check: Check,
   x: X, alert: TriangleAlert, send: SendHorizontal, pin: MapPin, user: UserRound, badge: BadgeCheck,
   rec: Circle, stop: Square, download: Download, back: ChevronLeft, arrow: ArrowRight, quote: Quote,
-  gavel: Gavel, list: ListChecks, thumb: ThumbsUp,
+  gavel: Gavel, list: ListChecks, thumb: ThumbsUp, exit: LogOut, phone: PhoneCall,
+  menu: Menu, camera: Camera, mic: Mic, plus: Plus, speaker: Volume2, mute: VolumeX, newchat: SquarePen,
 }
 
 export type IconName = keyof typeof ICONS

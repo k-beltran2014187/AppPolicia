@@ -3,26 +3,27 @@
 Sistema visual de PoliGT, inspirado en el análisis independiente de Wise (VoltAgent/awesome-design-md). No usa logos, textos ni la fuente propietaria de Wise. Debe sentirse **claro, de confianza y fácil de leer bajo estrés**, en un teléfono, con una mano.
 
 ## 1. Visual Theme & Atmosphere
-Amigable y directo. Acento único verde lima sobre neutros grisáceos con tinte verde. Tipografía display muy gruesa para titulares cortos; texto de lectura en peso regular. Tarjetas blancas grandes y muy redondeadas. La profundidad viene del contraste de superficies, no de sombras. Sin emojis: solo íconos de línea (Lucide).
+Institucional y cercano: **azul marino y azul de Guatemala** (confianza, justicia, autoridad serena) con un **dorado** discreto como detalle de "ley/verificado". Fondo gris azulado muy claro, tarjetas blancas grandes y redondeadas, titulares gruesos. Debe leerse bien bajo estrés, con una mano, en el teléfono. Sin emojis: íconos de línea (Lucide). El verde se descartó: en este contexto se sentía más "fintech" que "derechos y justicia".
+
+Estructura inspirada en patrones de apps similares (ACLU Mobile Justice y afines, asistentes legales con IA): grabar siempre a un toque, guías cortas por situación, informe del incidente, fuentes visibles en cada respuesta, aviso claro de alcance (informa, no representa) y privacidad como requisito.
 
 ## 2. Color Palette & Roles
 | Token | Claro | Oscuro | Rol |
 |---|---|---|---|
-| `--accent` | #9fe870 | #9fe870 | Único acento: CTA principal, estado activo, burbuja del usuario |
-| `--accent-ink` | #163300 | #163300 | Texto/ícono sobre el acento |
-| `--accent-soft` | #e2f6d5 | #223319 | Fondo suave de íconos y estados "bien" |
-| `--bg` | #e8ebe6 | #0e0f0c | Fondo de página (gris con tinte verde) |
-| `--card` | #ffffff | #181a16 | Tarjetas y paneles |
-| `--fg` | #0e0f0c | #f1f3ee | Texto principal |
-| `--muted` | #5d625a | #a3a99d | Texto secundario |
-| `--line` | #d3d8cf | #2b2e27 | Bordes de 1px |
-| `--link` | #163300 | #9fe870 | Enlaces y chips |
-| `--good` | #2f7d1f | #8fdc5f | Positivo |
+| `--accent` | #1d4f91 | #7db8ee | Acción principal, estado activo, burbuja del usuario |
+| `--accent-ink` | #ffffff | #08111f | Texto/ícono sobre el acento |
+| `--accent-soft` | #e4edf8 | #14304f | Fondo suave de íconos y estados "bien" |
+| `--gold` | #b7791f | #e0b45a | Detalle: "base legal", insignias, Mike |
+| `--bg` | #f2f5fa | #08111f | Fondo de página |
+| `--card` | #ffffff | #0f1d33 | Tarjetas y paneles |
+| `--fg` | #0b1b33 | #eaf0fa | Texto principal |
+| `--muted` | #54627a | #9aa9c2 | Texto secundario |
+| `--line` | #d5ddea | #213250 | Bordes |
+| `--link` | #1d4f91 | #8ec3f2 | Enlaces y chips |
+| `--good` | #1e7a5c | #5fd0a3 | Verificado / positivo |
 | `--warn` | #8a5a00 | #f2bf4f | Advertencia, "pendiente de validación" |
-| `--bad` | #b3261e | #ff8f87 | Error, "evita", acciones destructivas |
-| `--bad-soft` | #fbe4e1 | #3a1c19 | Fondo suave de "evita" |
-El verde lima se reserva para la acción principal y el estado activo. No se introduce un segundo acento de marca.
-
+| `--bad` | #b3261e | #ff8f87 | Emergencia, "evita", grabar, destructivo |
+Héroe: degradado #0b2545 → #14407a → #1d6bb8. Contraste AA en texto y botones. El rojo se reserva a emergencia y grabación.
 ## 3. Typography Rules
 Familia: **Inter Variable** (empaquetada, funciona sin internet) con respaldo del sistema. Sustituye a Wise Sans.
 | Rol | Tamaño | Peso | Notas |
@@ -55,10 +56,10 @@ Sin sombras en tarjetas. Jerarquía por superficie: fondo gris, tarjeta blanca, 
 
 ## 7. Do's and Don'ts
 Do: un solo acento lima; radio 24px consistente; titulares gruesos y cortos; íconos de línea de 2px; contraste AA.
-Don't: emojis como íconos; barras de color al borde de tarjetas; segundo color de marca; sombras pesadas; texto lima sobre blanco (ilegible).
+Don't: emojis como íconos; barras de color al borde de tarjetas; más de un acento (el dorado es solo detalle); sombras pesadas.
 
 ## 8. Responsive Behavior
 Diseño móvil primero (≥ 360px). Sobre 640px el contenido se centra con ancho máximo. Respeta `safe-area-inset-*`. Respeta `prefers-reduced-motion` y `prefers-color-scheme`.
 
 ## 9. Agent Prompt Guide
-Colores rápidos: lima #9fe870, tinta verde #163300, fondo #e8ebe6, texto #0e0f0c. Prompt: "Pantalla móvil de PoliGT en estilo Wise: fondo gris verdoso, tarjetas blancas de 24px, un único CTA lima con texto verde oscuro, titulares Inter 900, íconos Lucide, sin emojis."
+Colores rápidos: azul #1d4f91, marino #0b2545, dorado #b7791f, fondo #f2f5fa, texto #0b1b33. Prompt: "Pantalla móvil de PoliGT: fondo gris azulado, tarjetas blancas de 24px, héroe en degradado marino-azul con detalle dorado, titulares Inter 800, íconos Lucide, sin emojis."

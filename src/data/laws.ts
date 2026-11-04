@@ -1,6 +1,8 @@
 import type { L } from '../i18n'
+import { CPRG_EXTRA } from './laws-const.ts'
+import { EXTRA } from './laws-extra.ts'
 
-export type Law = 'CPRG' | 'LT' | 'RT' | 'CPP' | 'PNC' | 'EMETRA'
+export type Law = 'CPRG' | 'CADH' | 'CPP' | 'CP' | 'PNC' | 'LT' | 'RT' | 'EMETRA'
 
 export interface Article {
   id: string
@@ -14,31 +16,42 @@ export interface Article {
   verified: 'leido' | 'referencia'
 }
 
+/** Las leyes de Guatemala son públicas. El orden de las claves es el orden en la app. */
 export const LAW_NAMES: Record<Law, { name: L; short: string; source: string }> = {
   CPRG: {
     name: { es: 'Constitución Política de la República de Guatemala', en: 'Political Constitution of Guatemala' },
     short: 'Constitución',
-    source: 'https://pdba.georgetown.edu/Constitutions/Guate/guate85.html',
+    source: 'https://www.oas.org/dil/esp/Constitucion_Guatemala.pdf',
   },
-  LT: {
-    name: { es: 'Ley de Tránsito (Decreto 132-96)', en: 'Traffic Law (Decree 132-96)' },
-    short: 'Ley de Tránsito',
-    source: 'https://transito.gob.gt/wp-content/uploads/2019/02/Ley-de-Transito.pdf',
-  },
-  RT: {
-    name: { es: 'Reglamento de Tránsito (Acuerdo Gubernativo 273-98 y reformas)', en: 'Traffic Regulation (Gov. Agreement 273-98 and reforms)' },
-    short: 'Reglamento de Tránsito',
-    source: 'https://www.soy502.com/sites/default/files/reglamento_de_transito.pdf',
+  CADH: {
+    name: { es: 'Convención Americana sobre Derechos Humanos (Pacto de San José)', en: 'American Convention on Human Rights (Pact of San José)' },
+    short: 'Convención Americana',
+    source: 'https://www.oas.org/dil/esp/tratados_B-32_Convencion_Americana_sobre_Derechos_Humanos.htm',
   },
   CPP: {
     name: { es: 'Código Procesal Penal (Decreto 51-92)', en: 'Criminal Procedure Code (Decree 51-92)' },
     short: 'Código Procesal Penal',
-    source: 'https://portal.pnc.edu.gt/wp-content/uploads/2024/02/CODIGO-PROCESAL-PENAL.pdf',
+    source: 'https://portal.pnc.edu.gt/wp-content/uploads/2025/03/3.-CODIGO-PROCESAL-PENAL.pdf',
+  },
+  CP: {
+    name: { es: 'Código Penal (Decreto 17-73)', en: 'Criminal Code (Decree 17-73)' },
+    short: 'Código Penal',
+    source: 'https://tse.org.gt/images/UECFFPP/leyes/Codigo_Penal.pdf',
   },
   PNC: {
     name: { es: 'Ley de la Policía Nacional Civil (Decreto 35-2024)', en: 'National Civil Police Law (Decree 35-2024)' },
     short: 'Ley PNC',
     source: 'https://www.policinglaw.info/assets/downloads/LEY-PNC-DECRETO-No.-35-2024.pdf',
+  },
+  LT: {
+    name: { es: 'Ley de Tránsito (Decreto 132-96)', en: 'Traffic Law (Decree 132-96)' },
+    short: 'Ley de Tránsito',
+    source: 'https://transito.gob.gt/wp-content/uploads/2015/06/Ley-y-Reglamento-Transito.pdf',
+  },
+  RT: {
+    name: { es: 'Reglamento de Tránsito (Acuerdo Gubernativo 273-98 y reformas)', en: 'Traffic Regulation (Gov. Agreement 273-98 and reforms)' },
+    short: 'Reglamento de Tránsito',
+    source: 'https://transito.gob.gt/wp-content/uploads/2015/06/Ley-y-Reglamento-Transito.pdf',
   },
   EMETRA: {
     name: { es: 'Acuerdo Gubernativo 67-98 (tránsito de la capital)', en: 'Gov. Agreement 67-98 (capital traffic)' },
@@ -46,8 +59,7 @@ export const LAW_NAMES: Record<Law, { name: L; short: string; source: string }> 
     source: 'https://www.google.com/search?q=Acuerdo+Gubernativo+67-98+tr%C3%A1nsito+Municipalidad+de+Guatemala',
   },
 }
-
-export const ARTICLES: Article[] = [
+const BASE: Article[] = [
   // ---------- Constitución ----------
   {
     id: 'cprg-4', law: 'CPRG', art: '4', verified: 'leido',
@@ -382,3 +394,12 @@ export const ARTICLES: Article[] = [
     },
   },
 ]
+
+const ORDER = Object.keys(LAW_NAMES) as Law[]
+const num = (a: Article) => Number.parseInt(a.art, 10) || 0
+
+/** Todas las leyes agrupadas en el orden de la app, y por número de artículo dentro de cada ley. */
+export const ARTICLES: Article[] = [...BASE, ...CPRG_EXTRA, ...EXTRA]
+  .map((a, i) => ({ a, i }))
+  .sort((x, y) => ORDER.indexOf(x.a.law) - ORDER.indexOf(y.a.law) || num(x.a) - num(y.a) || x.i - y.i)
+  .map(({ a }) => a)

@@ -1,5 +1,6 @@
 import { UI, tr, useLang } from '../i18n'
 import { SCENARIOS } from '../data/scenarios'
+import { ARTICLES } from '../data/laws'
 import type { Role } from '../App'
 import { Icon } from '../icons'
 import Mike from '../Mike'
@@ -30,8 +31,43 @@ export default function Home({ role, setRole, go }: Props) {
         <span className="sos-sub">{tr(UI.askSub, lang)}</span>
         <span className="sos-go"><Icon name="arrow" size={24} /></span>
       </button>
-      <button className="btn" onClick={() => go('s:alto')}>
-        {role === 'civil' ? tr(UI.stoppedBtn, lang) : tr(UI.officerBtn, lang)} · {tr(UI.stoppedSub, lang)}
+      <button className="stopped" onClick={() => go('s:alto')}>
+        <span className="ico-circle"><Icon name="siren" size={22} /></span>
+        <span className="stopped-text">
+          <strong>{role === 'civil' ? tr(UI.stoppedBtn, lang) : tr(UI.officerBtn, lang)}</strong>
+          <small>{tr(UI.stoppedSub, lang)}</small>
+        </span>
+        <Icon name="arrow" size={20} />
+      </button>
+      <div className="quick">
+        <button className="q rec" onClick={() => go('record')}>
+          <span className="qi"><Icon name="record" size={22} /></span>
+          {tr(UI.quickRecord, lang)}
+        </button>
+        <button className="q" onClick={() => go('report')}>
+          <span className="qi"><Icon name="report" size={22} /></span>
+          {tr(UI.report, lang)}
+        </button>
+        <button className="q" onClick={() => go('help')}>
+          <span className="qi"><Icon name="pin" size={22} /></span>
+          {tr(UI.quickShare, lang)}
+        </button>
+      </div>
+      <a className="emergency" href="tel:110">
+        <span className="emergency-ico"><Icon name="phone" size={22} /></span>
+        <span className="stopped-text">
+          <strong>{tr(UI.emergency, lang)} · 110</strong>
+          <small>{tr(UI.emergencySub, lang)}</small>
+        </span>
+      </a>
+
+      <button className="stopped denuncia-card" onClick={() => go('denuncia')}>
+        <span className="ico-circle gold-ico"><Icon name="badge" size={22} /></span>
+        <span className="stopped-text">
+          <strong>{tr(UI.denounceTitle, lang)}</strong>
+          <small>{tr(UI.denounceSub, lang)}</small>
+        </span>
+        <Icon name="arrow" size={20} />
       </button>
 
       <h2>{tr(UI.situations, lang)}</h2>
@@ -44,13 +80,14 @@ export default function Home({ role, setRole, go }: Props) {
         ))}
       </div>
 
-      <h2>{tr(UI.tools, lang)}</h2>
-      <div className="grid">
-        <button className="card" onClick={() => go('record')}><span className="ico-circle"><Icon name="record" size={22} /></span><span>{tr(UI.record, lang)}</span></button>
-        <button className="card" onClick={() => go('help')}><span className="ico-circle"><Icon name="help" size={22} /></span><span>{tr(UI.help, lang)}</span></button>
-        <button className="card" onClick={() => go('report')}><span className="ico-circle"><Icon name="report" size={22} /></span><span>{tr(UI.report, lang)}</span></button>
-        <button className="card" onClick={() => go('laws')}><span className="ico-circle"><Icon name="laws" size={22} /></span><span>{tr(UI.laws, lang)}</span></button>
-      </div>
+      <button className="lawscard" onClick={() => go('laws')}>
+        <span className="ico-circle gold-ico"><Icon name="laws" size={22} /></span>
+        <span>
+          <strong>{tr(UI.lawsCardTitle, lang)}</strong>
+          <small>{ARTICLES.length} {tr(UI.lawsCardSub, lang)}</small>
+        </span>
+        <Icon name="arrow" size={20} />
+      </button>
       <p className="muted small">{tr(UI.installTip, lang)}</p>
     </div>
   )

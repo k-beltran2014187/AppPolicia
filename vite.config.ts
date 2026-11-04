@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
@@ -9,13 +9,18 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
+      workbox: {
+        // The API must never be answered from the cache (answers are live, per user).
+        navigateFallbackDenylist: [/^\/api\//],
+        runtimeCaching: [{ urlPattern: /^\/api\//, handler: 'NetworkOnly' }],
+      },
       manifest: {
         name: 'PoliGT',
         short_name: 'PoliGT',
         description: 'Conoce tus derechos y deberes en una parada de la PNC o EMETRA',
         lang: 'es',
-        theme_color: '#9fe870',
-        background_color: '#e8ebe6',
+        theme_color: '#0b2545',
+        background_color: '#f2f5fa',
         display: 'standalone',
         start_url: './',
         icons: [
@@ -25,4 +30,5 @@ export default defineConfig({
       },
     }),
   ],
+  test: { environment: 'node', include: ['tests/**/*.test.{ts,js}'] },
 })

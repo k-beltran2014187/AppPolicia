@@ -1,0 +1,141 @@
+import type { Article } from './laws'
+
+/**
+ * Derechos humanos de la Constitución Política de la República de Guatemala (Título II).
+ * Texto tomado de la fuente indicada en LAW_NAMES.CPRG; las leyes son públicas.
+ */
+export const CPRG_EXTRA: Article[] = [
+  {
+    id: 'cprg-1', law: 'CPRG', art: '1',
+    title: { es: "Protección a la persona", en: "Protection of the person" },
+    summary: { es: "El Estado se organiza para proteger a la persona y a la familia; su fin supremo es el bien común.", en: "The State is organized to protect the person and the family; its supreme goal is the common good." },
+    quote: "El Estado de Guatemala se organiza para proteger a la persona y a la familia; su fin supremo es la realizaci�n del bien com�n.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-2', law: 'CPRG', art: '2',
+    title: { es: "Deberes del Estado", en: "Duties of the State" },
+    summary: { es: "El Estado debe garantizar a los habitantes la vida, la libertad, la justicia, la seguridad, la paz y el desarrollo integral de la persona.", en: "The State must guarantee residents life, liberty, justice, security, peace and the integral development of the person." },
+    quote: "Es deber del Estado garantizarle a los habitantes de la Rep�blica la vida, la libertad, la justicia, la seguridad, la paz y el desarrollo integral de la persona. TITULO II DERECHOS HUMANOS CAP�TULO I DERECHOS INDIVIDUALES",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-3', law: 'CPRG', art: '3',
+    title: { es: "Derecho a la vida", en: "Right to life" },
+    summary: { es: "El Estado garantiza y protege la vida humana desde su concepción, así como la integridad y la seguridad de la persona.", en: "The State guarantees and protects human life from conception, as well as the integrity and security of the person." },
+    quote: "El estado garantiza y protege la vida humana desde su concepci�n, as� como la integridad y la seguridad de la persona.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-13', law: 'CPRG', art: '13',
+    title: { es: "Motivos para auto de prisión", en: "Grounds for a detention order" },
+    summary: { es: "No se puede dictar auto de prisión sin información de que se cometió un delito y motivos racionales para creer que la persona detenida lo cometió o participó. La policía no puede presentar a nadie ante los medios si un tribunal competente no lo ha indagado antes.", en: "A detention order requires information that a crime was committed and sufficient rational grounds to believe the detainee committed or took part in it. Police may not present anyone to the media unless a competent court has first questioned them." },
+    quote: "No podr� dictarse auto de prisi�n, sin que preceda informaci�n de haberse cometido un delito y sin que concurran motivos racionales suficientes para creer que la persona detenida lo ha cometido o participado en �l. Las autoridades policiales no podr�n presentar de oficio, ante los medios de comunicaci�n social, a ninguna persona que previamente no haya sido indagada por tribunal competente.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-15', law: 'CPRG', art: '15',
+    title: { es: "Irretroactividad de la ley", en: "Non-retroactivity of law" },
+    summary: { es: "La ley no tiene efecto retroactivo, salvo en materia penal cuando favorece al reo.", en: "Laws are not retroactive, except in criminal matters when they favor the accused." },
+    quote: "La ley no tiene efecto retroactivo, salvo en materia penal cuando favorezca al reo.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-16', law: 'CPRG', art: '16',
+    title: { es: "Declaración contra sí y parientes", en: "No self-incrimination" },
+    summary: { es: "En proceso penal nadie puede ser obligado a declarar contra sí mismo, contra su cónyuge o conviviente, ni contra sus parientes dentro de los grados de ley.", en: "In criminal proceedings no one can be forced to testify against themselves, their spouse or partner, or their relatives within the degrees set by law." },
+    quote: "En proceso penal, ninguna persona puede ser obligada a declarar contra s� misma, contra su c�nyuge o persona unida de hecho legalmente, ni contra sus parientes dentro de los grados de ley.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-17', law: 'CPRG', art: '17',
+    title: { es: "No hay delito ni pena sin ley anterior", en: "No crime or penalty without prior law" },
+    summary: { es: "Solo es punible lo calificado como delito o falta y penado por una ley anterior a su comisión. No hay prisión por deuda.", en: "Only acts defined as a crime or offense and punished by a law prior to the act are punishable. There is no imprisonment for debt." },
+    quote: "No son punibles las acciones u omisiones que no est�n calificadas como delito o falta y penadas por ley anterior a su perpetraci�n. No hay prisi�n por deuda.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-19', law: 'CPRG', art: '19',
+    title: { es: "Sistema penitenciario", en: "Prison system" },
+    summary: { es: "El sistema penitenciario busca la readaptación y reeducación de los reclusos. Deben ser tratados como seres humanos, sin discriminación, y no pueden sufrir tratos crueles, torturas ni coacciones.", en: "The prison system aims at the social rehabilitation and re-education of inmates. They must be treated as human beings, without discrimination, and may not suffer cruel treatment, torture or coercion." },
+    quote: "El sistema penitenciario debe tender a la readaptaci�n social y a la reeducaci�n de los reclusos y cumplir en el tratamiento de los mismos, con las siguientes normas m�nimas: Deben ser tratados como seres humanos; no deben ser discriminados por motivo alguno, ni podr�n inflig�rseles tratos crueles, torturas f�sicas, morales, ps�quicas, coacciones o molestias, trabajos incompatibles con su estado f�sico, acciones denigrante s a su dignidad, o hacerles v�ctimas de exacciones, ni ser sometidos a experimentos cient�ficos; Deben cumplir las penas en los lugares destinados para el efecto. Los centros penales son de car�cter civil y con personal especializado; y Tienen derecho a comunicarse, cuando lo soliciten, con sus familiares, abogado defensor, asistente religioso o m�dico, y en su caso, con el representante diplom�tico o consular de su nacionalidad. La infracci�n de cualquiera de las normas establecidas en este art�culo, da derecho al detenido a reclamar del Estado la indemnizaci�n por los da�os ocasionados y la Corte Suprema de Justicia ordenar� su protecci�n inmediata. El Estado deber� crear y fomentar las condiciones para el exacto cumplimiento de lo preceptuado en este art�culo.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-23', law: 'CPRG', art: '23',
+    title: { es: "Inviolabilidad de la vivienda", en: "Inviolability of the home" },
+    summary: { es: "Nadie puede entrar a una vivienda sin permiso de quien la habita, salvo con orden escrita de juez que indique el motivo, entre las 6:00 y las 18:00 horas y en presencia del interesado.", en: "No one may enter a home without the occupant’s permission, except with a written judge’s order stating the reason, between 6:00 and 18:00, and in the presence of the person concerned." },
+    quote: "La vivienda es inviolable. Nadie podr� penetrar en morada ajena sin permiso de quien la habita, salvo por orden escrita de juez competente en la que se especifique el motivo de la diligencia y nunca antes de las seis ni despu�s de las dieciocho horas, Tal diligencia se realizar� siempre en presencia del interesado, o de su mandatario.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-26', law: 'CPRG', art: '26',
+    title: { es: "Libertad de locomoción", en: "Freedom of movement" },
+    summary: { es: "Toda persona puede entrar, permanecer, transitar y salir del país y cambiar de domicilio, sin más limitaciones que las que fije la ley. A un guatemalteco no se le puede expatriar ni negar su pasaporte o documentos de identificación.", en: "Everyone may enter, stay, travel within and leave the country and change residence, with no limits other than those set by law. A Guatemalan cannot be expatriated or denied a passport or ID documents." },
+    quote: "Toda persona tiene libertad de entrar, permanecer, transitar y salir del territorio nacional y cambiar de domicilio o residencia, sin m�s limitaciones que las establecidas por ley. No podr� expatriarse a ning�n guatemalteco, ni prohib�rsele la entrada al territorio nacional o neg�rsele pasaporte u otros documentos de identificaci�n. Los guatemaltecos pueden entrar y salir del pa�s sin llenar el requisito de visa. La ley determinar� las responsabilidades en que incurran quienes infrinjan esta disposici�n.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-28', law: 'CPRG', art: '28',
+    title: { es: "Derecho de petición", en: "Right to petition" },
+    summary: { es: "Toda persona puede dirigir peticiones a la autoridad, que debe tramitarlas y resolverlas conforme a la ley. En materia administrativa el plazo para resolver y notificar no puede exceder de treinta días.", en: "Everyone may submit petitions to the authorities, who must process and resolve them according to law. In administrative matters the deadline to resolve and notify cannot exceed thirty days." },
+    quote: "Los habitantes de la Rep�blica de Guatemala tienen derecho a dirigir, individual o colectivamente, peticiones a la autoridad, la que est� obligada a tramitarlas y deber� resolverlas conforme a la ley. En materia administrativa el t�rmino para resolver las peticiones y notificar las resoluciones no podr� exceder de treinta d�as. En materia fiscal, para impugnar resoluciones administrativas en los expedientes que se originen en reparos o ajustes por cualquier tributo, no se exigir� al contribuyente el pago previo del impuesto o garant�a alguna.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-29', law: 'CPRG', art: '29',
+    title: { es: "Libre acceso a tribunales y dependencias del Estado", en: "Free access to courts and State offices" },
+    summary: { es: "Toda persona tiene libre acceso a los tribunales, dependencias y oficinas del Estado para ejercer sus acciones y hacer valer sus derechos conforme a la ley.", en: "Everyone has free access to courts and State offices to bring actions and assert their rights in accordance with the law." },
+    quote: "Toda persona tiene libre acceso a los tribunales, dependencias y oficinas del Estado, para ejercer sus acciones y hacer valer sus derechos de conformidad con la ley. Los extranjeros �nicamente podr�n acudir a la v�a diplom�tica en caso de denegaci�n de justicia. No se califica como tal, el solo hecho de que el fallo sea contrario a sus intereses y en todo caso, deben haberse agotado los recursos legales que establecen las leyes guatemaltecas.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-30', law: 'CPRG', art: '30',
+    title: { es: "Publicidad de los actos administrativos", en: "Publicity of administrative acts" },
+    summary: { es: "Todos los actos de la administración son públicos. Los interesados pueden obtener informes, copias y certificaciones y consultar expedientes, salvo asuntos militares o diplomáticos de seguridad nacional o datos dados bajo garantía de confidencia.", en: "All acts of the administration are public. Interested parties may obtain reports, copies and certifications and consult files, except for military or diplomatic national-security matters or data given under a guarantee of confidence." },
+    quote: "Todos los actos de la administraci�n son p�blicos. Los interesados tienen derecho a obtener, en cualquier tiempo, informes, copias, reproducciones y certificaciones que soliciten y la exhibi ci�n de los expedientes que deseen consultar, salvo que se trate de asuntos militares o diplom�ticos de seguridad nacional, o de datos suministrados por particulares bajo garant�a de confidencia.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-31', law: 'CPRG', art: '31',
+    title: { es: "Acceso a archivos y registros estatales", en: "Access to State files and records" },
+    summary: { es: "Toda persona tiene derecho a conocer lo que conste de ella en archivos y registros estatales y la finalidad de esa información, y a su corrección, rectificación y actualización.", en: "Everyone has the right to know what State files and records contain about them and what the information is used for, and to have it corrected, rectified and updated." },
+    quote: "Toda persona tiene el derecho de conocer lo que de ella conste en archivos, fichas o cualquier otra forma de registros estatales, y la finalidad a que se dedica esta informaci�n, as� como a correcci�n, rectificaci�n y actualizaci�n. Quedan prohibidos los registros y archivos de filiaci�n pol�tica, excepto los propios de las autoridades electorales y de los partidos pol�ticos.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-33', law: 'CPRG', art: '33',
+    title: { es: "Derecho de reunión y manifestación", en: "Right of assembly and demonstration" },
+    summary: { es: "Se reconoce el derecho de reunión pacífica y sin armas. No puede restringirse más que para garantizar el orden público, y basta la notificación previa de los organizadores a la autoridad.", en: "The right to peaceful, unarmed assembly is recognized. It may only be regulated to guarantee public order, and prior notice by the organizers to the authority is enough." },
+    quote: "Se reconoce el derecho de reuni�n pac�fica y sin armas. Los derechos de reuni�n y de manifestaci�n p�blica no pueden ser restringidos, disminuidos o coartados; y la ley los regular� con el �nico objeto de garantizar el orden p�blico. Las manifestaciones religiosas en el exterior de los templos son permitidas y se rigen por la ley. Para el ejercicio de estos derechos bastar� la previa notificaci�n de los organizadores ante la autoridad competente.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-34', law: 'CPRG', art: '34',
+    title: { es: "Derecho de asociación", en: "Right of association" },
+    summary: { es: "Se reconoce el derecho de libre asociación. Nadie está obligado a formar parte de grupos o asociaciones de autodefensa o similares.", en: "The right of free association is recognized. No one is obliged to join self-defense groups or similar associations." },
+    quote: "Se reconoce el derecho de libre asociaci�n. Nadie est� obligado a asociarse ni a formar parte de grupos o asociaciones de auto-defensa o similares. Se except�a el caso de la colegiaci�n profesional.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-36', law: 'CPRG', art: '36',
+    title: { es: "Libertad de religión", en: "Freedom of religion" },
+    summary: { es: "El ejercicio de todas las religiones es libre y toda persona puede practicar su religión o creencia en público y en privado.", en: "The exercise of all religions is free and everyone may practice their religion or belief in public and in private." },
+    quote: "El ejercicio de todas las religiones es libre. Toda persona tiene derechos a practicar su religi�n o creencia, tanto en p�blico como en privado, por medio de la ense�anza, el culto y la observancia, sin m�s l� mites que el orden p�blico y el respeto debido a la dignidad de la jerarqu�a y a los fieles de otros credos.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-44', law: 'CPRG', art: '44',
+    title: { es: "Derechos inherentes a la persona humana", en: "Rights inherent to the human person" },
+    summary: { es: "Los derechos que da la Constitución no excluyen otros inherentes a la persona humana. Son nulas las leyes y disposiciones que disminuyan, restrinjan o tergiversen los derechos que la Constitución garantiza.", en: "The rights granted by the Constitution do not exclude others inherent to the human person. Laws and provisions that diminish, restrict or distort constitutional rights are void." },
+    quote: "Los derechos y garant�as que otorga la Constituci�n no excluyen otros que, aunque no figuren expresamente en ella, son inherentes a la persona humana. El inter�s social prevalece sobre el inter�s particular. Ser�n nulas ipso jure las leyes y las disposiciones gubernativas o de cualquier otro orden que disminuyan, restrinjan o tergiversen los derechos que la Constituci�n garantiza.",
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-46', law: 'CPRG', art: '46',
+    title: { es: "Preeminencia del derecho internacional", en: "Primacy of international law" },
+    summary: { es: "En materia de derechos humanos, los tratados y convenciones aceptados y ratificados por Guatemala tienen preeminencia sobre el derecho interno.", en: "On human rights, treaties and conventions accepted and ratified by Guatemala take precedence over domestic law." },
+    quote: "Se establece el principio general de que en materia de derechos humanos, los tratados y convenciones aceptados y ratificados por Guatemala, tienen preeminencia sobre el derecho interno. CAP�TULO II DERECHOS SOCIALES SECCI�N PRIMERA Familia",
+    verified: 'leido',
+  },
+]
