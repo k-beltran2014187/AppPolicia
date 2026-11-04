@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ARTICLES } from '../src/data/laws'
+import { ARTICLES, LAW_NAMES } from '../src/data/laws'
 import { SCENARIOS } from '../src/data/scenarios'
 import { localSearch, cleanAnswer } from '../src/search'
 
@@ -13,6 +13,17 @@ describe('legal library', () => {
     for (const a of ARTICLES) {
       expect(a.title.es && a.title.en && a.summary.es && a.summary.en, a.id).toBeTruthy()
     }
+  })
+  it('every article has a valid id, a known law, an article number and an official source', () => {
+    for (const a of ARTICLES) {
+      expect(a.id, a.id).toMatch(/^[a-z0-9-]+$/)
+      expect(LAW_NAMES[a.law], a.id).toBeTruthy()
+      expect(String(a.art).trim(), a.id).not.toBe('')
+      expect(LAW_NAMES[a.law].source, a.id).toMatch(/^https:\/\//)
+    }
+  })
+  it('articles marked as read include the official quote', () => {
+    for (const a of ARTICLES) if (a.verified === 'leido') expect(a.quote?.trim().length ?? 0, a.id).toBeGreaterThan(10)
   })
   it('every scenario reference points to an existing article', () => {
     const missing: string[] = []

@@ -58,10 +58,10 @@ export default function Drawer({ open, onClose, kind, go, role, setRole, lang, s
         <div className="drawer-foot">
           <div className="seg" role="group" aria-label={tr(UI.iAm, lang)}>
             <button className={role === 'civil' ? 'on' : ''} onClick={() => setRole('civil')} aria-pressed={role === 'civil'}>
-              <Icon name="user" size={18} /> {tr(UI.civil, lang)}
+              {tr(UI.roleDriver, lang)}
             </button>
             <button className={role === 'officer' ? 'on' : ''} onClick={() => setRole('officer')} aria-pressed={role === 'officer'}>
-              <Icon name="badge" size={18} /> {tr(UI.officer, lang)}
+              {tr(UI.roleOfficer, lang)}
             </button>
           </div>
           <div className="row wrap">

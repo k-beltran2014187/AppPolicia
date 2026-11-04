@@ -85,7 +85,11 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
     try { sessionStorage.setItem(STORE, JSON.stringify(msgs.slice(-30))) } catch { /* ignore */ }
     if (msgs.length || busy) end.current?.scrollIntoView({ block: 'end', behavior: 'smooth' })
   }, [msgs, busy])
-  useEffect(() => () => { abort.current?.abort(); mic.current?.stop(); stopSpeaking() }, [])
+  const alive = useRef(true)
+  useEffect(() => {
+    alive.current = true
+    return () => { alive.current = false; abort.current?.abort(); mic.current?.stop(); stopSpeaking() }
+  }, [])
 
   const toggleSpeak = () => {
     const v = !speakAll
@@ -190,6 +194,7 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
     mic.current = listen(lang, {
       onText: (t) => setInput(t),
       onDone: (t, err?: ListenError) => {
+        if (!alive.current) return
         setListening(false)
         mic.current = null
         if (t) void send(t, true)
