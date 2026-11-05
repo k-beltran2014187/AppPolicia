@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { LangContext, UI, tr, type Lang } from './i18n'
 import Home from './views/Home'
 import Drawer from './Drawer'
+import { LogoMark, Wordmark } from './Logo'
 import ErrorBoundary from './ErrorBoundary'
 import LockScreen from './LockScreen'
 import { Icon } from './icons'
@@ -78,7 +79,7 @@ export default function App() {
           <div className="brand">
             <button className="back" onClick={() => setMenu(true)} aria-label={tr(UI.menu, lang)} aria-expanded={menu}><Icon name="menu" size={24} /></button>
             {kind === 's' && <button className="back" onClick={() => window.history.back()} aria-label={tr(UI.back, lang)}><Icon name="back" size={26} /></button>}
-            <button className="logo logo-btn" onClick={() => go('chat')} aria-label={`${UI.appName[lang]} – ${tr(UI.chat, lang)}`}><span className="logo-mark"><Icon name="shield" size={18} /></span>{UI.appName[lang]}</button>
+            <button className="logo logo-btn" onClick={() => go('chat')} aria-label={`${UI.appName[lang]} – ${tr(UI.chat, lang)}`}><LogoMark size={34} /><Wordmark /></button>
           </div>
           <div className="top-actions">
             <button className="lang exit" onClick={quickExit} aria-label={tr(UI.quickExit, lang)} title={tr(UI.quickExit, lang)}>

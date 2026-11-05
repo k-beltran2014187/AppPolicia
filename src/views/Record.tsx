@@ -22,7 +22,7 @@ function Item({ r, onDelete }: { r: Recording; onDelete: () => void }) {
       <p className="small muted">{new Date(r.createdAt).toLocaleString(lang === 'es' ? 'es-GT' : 'en-US')} · {(r.blob.size / 1_048_576).toFixed(1)} MB</p>
       {r.kind === 'video' ? <video src={url} controls playsInline preload="metadata" /> : r.kind === 'photo' ? <img className="photo" src={url} alt="" /> : <audio src={url} controls preload="metadata" />}
       <div className="row">
-        <a className="btn" href={url} download={`poligt-${r.createdAt}.${ext}`}><Icon name="download" size={18} /> {tr(UI.download, lang)}</a>
+        <a className="btn" href={url} download={`sosgt-${r.createdAt}.${ext}`}><Icon name="download" size={18} /> {tr(UI.download, lang)}</a>
         <button className="btn danger" onClick={onDelete}>{tr(UI.delete, lang)}</button>
       </div>
     </div>

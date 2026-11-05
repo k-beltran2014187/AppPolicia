@@ -15,8 +15,8 @@ export default defineConfig({
         runtimeCaching: [{ urlPattern: /^\/api\//, handler: 'NetworkOnly' }],
       },
       manifest: {
-        name: 'PoliGT',
-        short_name: 'PoliGT',
+        name: 'SOSgt',
+        short_name: 'SOSgt',
         description: 'Conoce tus derechos y deberes en una parada de la PNC o EMETRA',
         lang: 'es',
         theme_color: '#0b2545',

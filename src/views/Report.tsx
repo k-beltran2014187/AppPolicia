@@ -32,7 +32,7 @@ export default function Report() {
     const { jsPDF } = await import('jspdf')
     const doc = new jsPDF()
     doc.setFontSize(16)
-    doc.text(`PoliGT - ${tr(UI.reportTitle, lang)}`, 14, 18)
+    doc.text(`SOSgt - ${tr(UI.reportTitle, lang)}`, 14, 18)
     doc.setFontSize(9)
     doc.text(new Date().toLocaleString(lang === 'es' ? 'es-GT' : 'en-US'), 14, 24)
     doc.setFontSize(11)
@@ -52,7 +52,7 @@ export default function Report() {
     const top = 292 - note.length * 4
     if (y > top - 4) { doc.addPage(); }
     doc.text(note, 14, top)
-    doc.save('poligt-informe.pdf')
+    doc.save('sosgt-informe.pdf')
   }
 
   return (

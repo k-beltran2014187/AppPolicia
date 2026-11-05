@@ -1,6 +1,6 @@
-# DESIGN.md — PoliGT
+# DESIGN.md — SOSgt
 
-Sistema visual de PoliGT, inspirado en el análisis independiente de Wise (VoltAgent/awesome-design-md). No usa logos, textos ni la fuente propietaria de Wise. Debe sentirse **claro, de confianza y fácil de leer bajo estrés**, en un teléfono, con una mano.
+Sistema visual de SOSgt, inspirado en el análisis independiente de Wise (VoltAgent/awesome-design-md). No usa logos, textos ni la fuente propietaria de Wise. Debe sentirse **claro, de confianza y fácil de leer bajo estrés**, en un teléfono, con una mano.
 
 ## 1. Visual Theme & Atmosphere
 Institucional y cercano: **azul marino y azul de Guatemala** (confianza, justicia, autoridad serena) con un **dorado** discreto como detalle de "ley/verificado". Fondo gris azulado muy claro, tarjetas blancas grandes y redondeadas, titulares gruesos. Debe leerse bien bajo estrés, con una mano, en el teléfono. Sin emojis: íconos de línea (Lucide). El verde se descartó: en este contexto se sentía más "fintech" que "derechos y justicia".
@@ -62,4 +62,4 @@ Don't: emojis como íconos; barras de color al borde de tarjetas; más de un ace
 Diseño móvil primero (≥ 360px). Sobre 640px el contenido se centra con ancho máximo. Respeta `safe-area-inset-*`. Respeta `prefers-reduced-motion` y `prefers-color-scheme`.
 
 ## 9. Agent Prompt Guide
-Colores rápidos: azul #1d4f91, marino #0b2545, dorado #b7791f, fondo #f2f5fa, texto #0b1b33. Prompt: "Pantalla móvil de PoliGT: fondo gris azulado, tarjetas blancas de 24px, héroe en degradado marino-azul con detalle dorado, titulares Inter 800, íconos Lucide, sin emojis."
+Colores rápidos: azul #1d4f91, marino #0b2545, dorado #b7791f, fondo #f2f5fa, texto #0b1b33. Prompt: "Pantalla móvil de SOSgt: fondo gris azulado, tarjetas blancas de 24px, héroe en degradado marino-azul con detalle dorado, titulares Inter 800, íconos Lucide, sin emojis."

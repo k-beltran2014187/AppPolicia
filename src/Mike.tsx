@@ -1,4 +1,4 @@
-/** Mike, el asesor virtual con IA de PoliGT. Ilustración plana; no es una persona real ni un abogado. */
+/** Mike, el asesor virtual con IA de SOSgt. Ilustración plana; no es una persona real ni un abogado. */
 export default function Mike({ size = 56 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 80 80" role="img" aria-label="Mike" className="mike">

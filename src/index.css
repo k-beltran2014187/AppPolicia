@@ -1,4 +1,4 @@
-/* PoliGT — ver DESIGN.md */
+/* SOSgt — ver DESIGN.md */
 :root {
   --accent: #1d4f91; --accent-ink: #ffffff; --accent-soft: #e4edf8; --gold: #b7791f;
   --bg: #f2f5fa; --card: #ffffff; --fg: #0b1b33; --muted: #54627a; --line: #d5ddea; --link: #1d4f91;
@@ -329,3 +329,9 @@ img.photo { width: 100%; border-radius: var(--r-sm); display: block; margin-bott
 @media (min-width: 700px) {
   .chat { height: calc(100dvh - 76px); }
 }
+
+/* v5 — marca SOSgt */
+.logo { gap: 9px; }
+.logo-svg { display: block; flex: none; border-radius: 9px; }
+.wordmark { font-weight: 900; letter-spacing: -.02em; }
+.wordmark-gt { color: #b7791f; margin-left: 1px; }

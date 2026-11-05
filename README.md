@@ -1,8 +1,8 @@
-# PoliGT
+# SOSgt
 
 PWA móvil para que personas en Guatemala conozcan sus derechos y deberes en una parada, retén o detención de la PNC, EMETRA o PMT. Incluye guías por situación, biblioteca de artículos, **Mike** (asesor virtual con IA), grabación de audio/video, informe del incidente en PDF y ayuda de emergencia. Funciona sin conexión.
 
-> PoliGT es informativa y **no sustituye a un abogado**. Los artículos están pendientes de revisión por un profesional del derecho.
+> SOSgt es informativa y **no sustituye a un abogado**. Los artículos están pendientes de revisión por un profesional del derecho.
 
 ## Desarrollo
 

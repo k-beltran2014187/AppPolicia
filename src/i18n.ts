@@ -28,7 +28,7 @@ export const UI = {
   offlineTag: { es: 'Sin conexión: búsqueda local', en: 'Offline: local search' },
   offlineFound: { es: 'No pude conectar con el asistente. Estos artículos guardados en tu teléfono son los más relacionados. Tócalos para leerlos:', en: 'Could not reach the assistant. These articles saved on your phone are the closest matches. Tap to read them:' },
   offlineNone: { es: 'No pude conectar con el asistente y no encontré artículos relacionados. Revisa la sección Leyes o las guías de Inicio.', en: 'Could not reach the assistant and found no related articles. Check the Laws section or the guides on Home.' },
-  appName: { es: 'PoliGT', en: 'PoliGT' },
+  appName: { es: 'SOSgt', en: 'SOSgt' },
   tagline: {
     es: 'Conoce tus derechos y deberes en una parada de la PNC o EMETRA',
     en: 'Know your rights and duties in a PNC or EMETRA stop',
@@ -61,8 +61,8 @@ export const UI = {
   source: { es: 'Ver fuente oficial', en: 'View official source' },
   disclaimerTitle: { es: 'Aviso importante', en: 'Important notice' },
   disclaimer: {
-    es: 'PoliGT es informativa y no sustituye a un abogado. Los artículos fueron tomados de textos oficiales pero están pendientes de revisión por un profesional del derecho. Sé siempre respetuoso, no huyas ni uses violencia.',
-    en: 'PoliGT is informational and does not replace a lawyer. Articles were taken from official texts but are pending review by a legal professional. Always be respectful; never flee or use violence.',
+    es: 'SOSgt es informativa y no sustituye a un abogado. Los artículos fueron tomados de textos oficiales pero están pendientes de revisión por un profesional del derecho. Sé siempre respetuoso, no huyas ni uses violencia.',
+    en: 'SOSgt is informational and does not replace a lawyer. Articles were taken from official texts but are pending review by a legal professional. Always be respectful; never flee or use violence.',
   },
   accept: { es: 'Entendido', en: 'Got it' },
   recStart: { es: 'Iniciar grabación', en: 'Start recording' },
@@ -146,7 +146,7 @@ export const UI = {
   pinWrong: { es: 'PIN incorrecto', en: 'Wrong PIN' },
   pinSaved: { es: 'PIN activado', en: 'PIN on' },
   unlock: { es: 'Desbloquear', en: 'Unlock' },
-  locked: { es: 'PoliGT está bloqueada', en: 'PoliGT is locked' },
+  locked: { es: 'SOSgt está bloqueada', en: 'SOSgt is locked' },
   shareWhatsApp: { es: 'Enviar por WhatsApp', en: 'Send via WhatsApp' },
   shareSms: { es: 'Enviar por SMS', en: 'Send via SMS' },
   shareOther: { es: 'Compartir…', en: 'Share…' },
