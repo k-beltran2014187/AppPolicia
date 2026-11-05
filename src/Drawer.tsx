@@ -13,6 +13,7 @@ interface Props {
   setRole: (r: Role) => void
   lang: Lang
   setLang: (l: Lang) => void
+  foreigner: boolean
   canLock: boolean
   onLock: () => void
 }
@@ -21,6 +22,7 @@ const ITEMS: { id: string; icon: IconName; label: L }[] = [
   { id: 'chat', icon: 'chat', label: UI.chat },
   { id: 'home', icon: 'home', label: UI.guides },
   { id: 'laws', icon: 'laws', label: UI.laws },
+  { id: 'foreign', icon: 'pin', label: { es: 'Si eres extranjero', en: 'If you are a foreign national' } },
   { id: 'denuncia', icon: 'badge', label: UI.denounceTitle },
   { id: 'record', icon: 'record', label: UI.record },
   { id: 'report', icon: 'report', label: UI.report },
@@ -28,7 +30,7 @@ const ITEMS: { id: string; icon: IconName; label: L }[] = [
   { id: 'account', icon: 'user', label: { es: 'Mi cuenta', en: 'My account' } },
 ]
 
-export default function Drawer({ open, onClose, kind, go, role, setRole, lang, setLang, canLock, onLock }: Props) {
+export default function Drawer({ open, onClose, kind, go, role, setRole, lang, setLang, foreigner, canLock, onLock }: Props) {
   const closeBtn = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -39,6 +41,8 @@ export default function Drawer({ open, onClose, kind, go, role, setRole, lang, s
     return () => document.removeEventListener('keydown', onKey)
   }, [open, onClose])
 
+  // A quien es extranjero se le muestra su sección justo debajo del chat.
+  const items = foreigner ? [ITEMS[0], ...ITEMS.filter((i) => i.id === 'foreign'), ...ITEMS.slice(1).filter((i) => i.id !== 'foreign')] : ITEMS
   const pick = (id: string) => { go(id); onClose() }
   const active = kind === 's' ? 'home' : kind
 
@@ -51,7 +55,7 @@ export default function Drawer({ open, onClose, kind, go, role, setRole, lang, s
           <button ref={closeBtn} className="back" onClick={onClose} aria-label={tr(UI.closeMenu, lang)}><Icon name="x" size={22} /></button>
         </div>
         <nav className="drawer-nav" aria-label={tr(UI.menu, lang)}>
-          {ITEMS.map((it) => (
+          {items.map((it) => (
             <button key={it.id} className={active === it.id ? 'on' : ''} onClick={() => pick(it.id)} aria-current={active === it.id ? 'page' : undefined}>
               <Icon name={it.icon} size={22} /> {tr(it.label, lang)}
             </button>

@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { tr, useLang, type L } from '../i18n'
 import { useAuth, type AuthError } from '../auth'
 import { Logo } from '../Logo'
 import Legal from './Legal'
-import { isDpi, isEmail, isPhone, looksLikeEmail, onlyDigits, passwordIssue } from '../validate'
+import { countryOptions, isEmail, isIdNumber, isPhone, looksLikeEmail, normId, passwordIssue, type IdType } from '../validate'
 
 const T = {
   loginTitle: { es: 'Inicia sesión', en: 'Sign in' },
@@ -28,10 +28,17 @@ const T = {
   firstSurname: { es: 'Primer apellido', en: 'First surname' },
   secondSurname: { es: 'Segundo apellido (opcional)', en: 'Second surname (optional)' },
   phone: { es: 'Celular', en: 'Mobile phone' },
-  phoneHint: { es: '8 dígitos, sin guiones', en: '8 digits, no dashes' },
+  phoneHint: { es: '8 dígitos, sin guiones. Si es de otro país, con su código.', en: '8 digits in Guatemala. For other countries, include the country code.' },
   email: { es: 'Correo electrónico', en: 'Email' },
-  dpi: { es: 'DPI', en: 'DPI (national ID)' },
+  nationality: { es: 'Nacionalidad', en: 'Nationality' },
+  nationalityPick: { es: 'Elige tu nacionalidad', en: 'Choose your nationality' },
+  nationalityNote: { es: 'Con tu nacionalidad personalizamos la información: si eres extranjero, te mostramos los derechos y las leyes que aplican a personas extranjeras en Guatemala.', en: 'We use your nationality to personalize the information: if you are a foreign national, we show you the rights and laws that apply to foreign persons in Guatemala.' },
+  idType: { es: 'Documento de identidad', en: 'Identity document' },
+  idDpi: { es: 'DPI', en: 'DPI (Guatemalan ID)' },
+  idPassport: { es: 'Pasaporte', en: 'Passport' },
+  idNumber: { es: 'Número de documento', en: 'Document number' },
   dpiHint: { es: '13 dígitos', en: '13 digits' },
+  passportHint: { es: 'Letras y números, tal como aparece', en: 'Letters and numbers, as printed' },
   dpiNote: { es: 'Lo usamos solo para identificarte como titular de la cuenta. Se guarda protegido, nadie más puede verlo y nunca se envía al asesor de IA.', en: 'Used only to identify you as the account holder. It is stored protected, nobody else can see it, and it is never sent to the AI advisor.' },
   password2: { es: 'Repite la contraseña', en: 'Repeat the password' },
   passwordHelp: { es: 'Mínimo 8 caracteres, con letras y números.', en: 'At least 8 characters, with letters and numbers.' },
@@ -46,9 +53,11 @@ const T = {
   save: { es: 'Guardar contraseña', en: 'Save password' },
   confirmSent: { es: 'Te enviamos un correo para confirmar tu cuenta. Ábrelo y luego inicia sesión.', en: 'We sent you an email to confirm your account. Open it, then sign in.' },
   eRequired: { es: 'Este dato es obligatorio.', en: 'This field is required.' },
-  ePhone: { es: 'Escribe un celular de 8 dígitos.', en: 'Enter an 8-digit phone number.' },
+  ePhone: { es: 'Escribe un celular válido (8 dígitos en Guatemala).', en: 'Enter a valid phone (8 digits in Guatemala).' },
   eEmail: { es: 'Escribe un correo válido.', en: 'Enter a valid email.' },
   eDpi: { es: 'El DPI debe tener 13 dígitos válidos.', en: 'The DPI must have 13 valid digits.' },
+  ePassport: { es: 'El pasaporte debe tener entre 5 y 20 letras o números.', en: 'The passport must have 5 to 20 letters or numbers.' },
+  eNationality: { es: 'Elige tu nacionalidad.', en: 'Choose your nationality.' },
   ePassShort: { es: 'Usa al menos 8 caracteres.', en: 'Use at least 8 characters.' },
   ePassWeak: { es: 'Incluye letras y números.', en: 'Include letters and numbers.' },
   eMatch: { es: 'Las contraseñas no coinciden.', en: "Passwords don't match." },
@@ -63,8 +72,8 @@ const T = {
 } satisfies Record<string, L>
 
 type Mode = 'login' | 'register' | 'forgot' | 'legal'
-type Form = { firstName: string; secondName: string; firstSurname: string; secondSurname: string; phone: string; email: string; dpi: string; password: string; password2: string; consent: boolean }
-const EMPTY: Form = { firstName: '', secondName: '', firstSurname: '', secondSurname: '', phone: '', email: '', dpi: '', password: '', password2: '', consent: false }
+type Form = { firstName: string; secondName: string; firstSurname: string; secondSurname: string; phone: string; email: string; nationality: string; idType: IdType; idNumber: string; password: string; password2: string; consent: boolean }
+const EMPTY: Form = { firstName: '', secondName: '', firstSurname: '', secondSurname: '', phone: '', email: '', nationality: '', idType: 'dpi', idNumber: '', password: '', password2: '', consent: false }
 
 export default function Auth({ onGuest }: { onGuest: () => void }) {
   const { lang } = useLang()
@@ -78,6 +87,7 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
   const [f, setF] = useState<Form>(EMPTY)
   const [errs, setErrs] = useState<Partial<Record<keyof Form, string>>>({})
 
+  const countries = useMemo(() => countryOptions(lang), [lang])
   const t = (k: keyof typeof T) => tr(T[k], lang)
   const fail = (e: AuthError) => setMsg({ kind: 'error', text: t(e) })
   const go = (m: Mode) => { setMode(m); setMsg(null); setErrs({}) }
@@ -103,7 +113,8 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
     if (!f.firstSurname.trim()) x.firstSurname = t('eRequired')
     if (!isPhone(f.phone)) x.phone = t('ePhone')
     if (!isEmail(f.email)) x.email = t('eEmail')
-    if (!isDpi(f.dpi)) x.dpi = t('eDpi')
+    if (!f.nationality) x.nationality = t('eNationality')
+    if (!isIdNumber(f.idType, f.idNumber)) x.idNumber = t(f.idType === 'dpi' ? 'eDpi' : 'ePassport')
     const pi = passwordIssue(f.password)
     if (pi) x.password = t(pi === 'short' ? 'ePassShort' : 'ePassWeak')
     else if (f.password !== f.password2) x.password2 = t('eMatch')
@@ -170,7 +181,22 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
             <label className="lbl">{t('secondSurname')}<input className="field" value={f.secondSurname} onChange={(e) => set('secondSurname', e.target.value)} /></label>
             <label className="lbl">{t('phone')}<input className="field" inputMode="tel" autoComplete="tel-national" maxLength={14} placeholder={t('phoneHint')} value={f.phone} onChange={(e) => set('phone', e.target.value)} /><Err k="phone" /></label>
             <label className="lbl">{t('email')}<input className="field" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" value={f.email} onChange={(e) => set('email', e.target.value)} /><Err k="email" /></label>
-            <label className="lbl">{t('dpi')}<input className="field" inputMode="numeric" autoComplete="off" maxLength={17} placeholder={t('dpiHint')} value={f.dpi} onChange={(e) => set('dpi', onlyDigits(e.target.value).slice(0, 13))} /><Err k="dpi" />
+            <label className="lbl">{t('nationality')}
+              <select className="field" value={f.nationality} onChange={(e) => set('nationality', e.target.value)} autoComplete="country">
+                <option value="">{t('nationalityPick')}</option>
+                {countries.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
+              </select>
+              <Err k="nationality" />
+              <span className="small muted">{t('nationalityNote')}</span>
+            </label>
+            <fieldset className="lbl seg-field">
+              <legend>{t('idType')}</legend>
+              <div className="seg" role="group" aria-label={t('idType')}>
+                <button type="button" className={f.idType === 'dpi' ? 'on' : ''} aria-pressed={f.idType === 'dpi'} onClick={() => { set('idType', 'dpi'); set('idNumber', '') }}>{t('idDpi')}</button>
+                <button type="button" className={f.idType === 'passport' ? 'on' : ''} aria-pressed={f.idType === 'passport'} onClick={() => { set('idType', 'passport'); set('idNumber', '') }}>{t('idPassport')}</button>
+              </div>
+            </fieldset>
+            <label className="lbl">{t('idNumber')}<input className="field" inputMode={f.idType === 'dpi' ? 'numeric' : 'text'} autoComplete="off" autoCapitalize="characters" maxLength={f.idType === 'dpi' ? 17 : 24} placeholder={t(f.idType === 'dpi' ? 'dpiHint' : 'passportHint')} value={f.idNumber} onChange={(e) => set('idNumber', f.idType === 'dpi' ? normId('dpi', e.target.value).slice(0, 13) : e.target.value.toUpperCase().replace(/[^A-Z0-9\s-]/g, ''))} /><Err k="idNumber" />
               <span className="small muted">{t('dpiNote')}</span>
             </label>
             <label className="lbl">{t('password')}<input className="field" type="password" autoComplete="new-password" value={f.password} onChange={(e) => set('password', e.target.value)} /><Err k="password" />

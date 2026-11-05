@@ -1,8 +1,9 @@
 import type { L } from '../i18n'
 import { CPRG_EXTRA } from './laws-const.ts'
 import { EXTRA } from './laws-extra.ts'
+import { FOREIGN } from './laws-foreign.ts'
 
-export type Law = 'CPRG' | 'CADH' | 'CPP' | 'CP' | 'PNC' | 'LT' | 'RT' | 'EMETRA'
+export type Law = 'CPRG' | 'CADH' | 'CPP' | 'CP' | 'PNC' | 'LT' | 'RT' | 'EMETRA' | 'CM' | 'CVRC'
 
 export interface Article {
   id: string
@@ -57,6 +58,16 @@ export const LAW_NAMES: Record<Law, { name: L; short: string; source: string }> 
     name: { es: 'Acuerdo Gubernativo 67-98 (tránsito de la capital)', en: 'Gov. Agreement 67-98 (capital traffic)' },
     short: 'AG 67-98',
     source: 'https://www.google.com/search?q=Acuerdo+Gubernativo+67-98+tr%C3%A1nsito+Municipalidad+de+Guatemala',
+  },
+  CM: {
+    name: { es: 'Código de Migración (Decreto 44-2016)', en: 'Migration Code (Decree 44-2016)' },
+    short: 'Código de Migración',
+    source: 'https://faolex.fao.org/docs/pdf/gua205827.pdf',
+  },
+  CVRC: {
+    name: { es: 'Convención de Viena sobre Relaciones Consulares (1963)', en: 'Vienna Convention on Consular Relations (1963)' },
+    short: 'Convención de Viena (consular)',
+    source: 'https://legal.un.org/ilc/texts/instruments/spanish/conventions/9_2_1963.pdf',
   },
 }
 const BASE: Article[] = [
@@ -265,7 +276,7 @@ const BASE: Article[] = [
   // ---------- Reglamento de Tránsito ----------
   {
     id: 'rt-10', law: 'RT', art: '10', verified: 'leido',
-    quote: "Todo vehículo para circular en las vías públicas del territorio nacional, debe poseer los siguientes documentos: a. Tarjeta de circulación o fotocopia autenticada de la misma; b. Placa, placas y calcomanías de circulación vigentes. La tarjeta de circulación o la fotocopia autenticada, será portada por el conductor de cada vehículo automotor, siempre que circule en las vías públicas del territorio nacional. La placa o placas de circulación irán sujetas en lugar visible en la parte frontal y posterior del vehículo. No necesitan portar ningún documento todo conductor de bicicleta, utilizada por niños de hasta 12 años de edad, la utilizada para hacer deporte o alguna otra actividad recreativa. El Departamento de Tránsito regulará lo relativo a la documentación de otros conductores de bicicletas. CAPITULO III Equipamiento Básico de los Vehículos y otras Especificaciones Técnicas",
+    quote: "Todo vehículo para circular en las vías públicas del territorio nacional, debe poseer los siguientes documentos: a. Tarjeta de circulación o fotocopia autenticada de la misma; b. Placa, placas y calcomanías de circulación vigentes. La tarjeta de circulación o la fotocopia autenticada, será portada por el conductor de cada vehículo automotor, siempre que circule en las vías públicas del territorio nacional. La placa o placas de circulación irán sujetas en lugar visible en la parte frontal y posterior del vehículo. No necesitan portar ningún documento todo conductor de bicicleta, utilizada por niños de hasta 12 años de edad, la utilizada para hacer deporte o alguna otra actividad recreativa. El Departamento de Tránsito regulará lo relativo a la documentación de otros conductores de bicicletas.",
     title: { es: 'Documentos del vehículo', en: 'Vehicle documents' },
     summary: {
       es: 'El conductor porta la tarjeta de circulación (o fotocopia autenticada). Las placas y calcomanías deben ir vigentes y visibles al frente y atrás.',
@@ -418,7 +429,7 @@ const ORDER = Object.keys(LAW_NAMES) as Law[]
 const num = (a: Article) => Number.parseInt(a.art, 10) || 0
 
 /** Todas las leyes agrupadas en el orden de la app, y por número de artículo dentro de cada ley. */
-export const ARTICLES: Article[] = [...BASE, ...CPRG_EXTRA, ...EXTRA]
+export const ARTICLES: Article[] = [...BASE, ...CPRG_EXTRA, ...EXTRA, ...FOREIGN]
   .map((a, i) => ({ a, i }))
   .sort((x, y) => ORDER.indexOf(x.a.law) - ORDER.indexOf(y.a.law) || num(x.a) - num(y.a) || x.i - y.i)
   .map(({ a }) => a)

@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase, authEnabled } from './supabase'
-import { normPhone } from './validate'
+import { normId, normPhone, type IdType } from './validate'
 
 export interface Profile {
   first_name: string
@@ -10,7 +10,9 @@ export interface Profile {
   second_surname: string | null
   phone: string
   email: string
-  dpi: string
+  id_type: IdType
+  id_number: string
+  nationality: string
 }
 
 export interface SignUpInput {
@@ -20,7 +22,9 @@ export interface SignUpInput {
   secondSurname: string
   phone: string
   email: string
-  dpi: string
+  idType: IdType
+  idNumber: string
+  nationality: string
   password: string
 }
 
@@ -90,7 +94,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!supabase || !uid) { setProfile(null); return }
     let alive = true
-    supabase.from('profiles').select('first_name, second_name, first_surname, second_surname, phone, email, dpi').eq('id', uid).maybeSingle()
+    supabase.from('profiles').select('first_name, second_name, first_surname, second_surname, phone, email, id_type, id_number, nationality').eq('id', uid).maybeSingle()
       .then(({ data }) => { if (alive) setProfile(data as Profile | null) })
     return () => { alive = false }
   }, [uid])
@@ -134,7 +138,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             first_surname: i.firstSurname.trim(),
             second_surname: i.secondSurname.trim(),
             phone: normPhone(i.phone),
-            dpi: i.dpi.replace(/\D/g, ''),
+            id_type: i.idType,
+            id_number: normId(i.idType, i.idNumber),
+            nationality: i.nationality.toUpperCase(),
             consent_at: new Date().toISOString(),
           },
         },

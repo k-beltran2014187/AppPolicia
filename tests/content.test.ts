@@ -25,6 +25,19 @@ describe('legal library', () => {
   it('articles marked as read include the official quote', () => {
     for (const a of ARTICLES) if (a.verified === 'leido') expect(a.quote?.trim().length ?? 0, a.id).toBeGreaterThan(10)
   })
+  it('quotes have no corrupted characters or trailing headings', () => {
+    for (const a of ARTICLES) {
+      const q = a.quote ?? ''
+      expect(q.includes('\uFFFD'), a.id).toBe(false)
+      expect(/\n/.test(q), a.id).toBe(false)
+      expect(/(Art[ií]culo|ARTICULO|CAPITULO|Cap[ií]tulo|T[IÍ]TULO)\s+\w+\.?\s*$/.test(q), a.id).toBe(false)
+    }
+  })
+  it('has the foreigner laws, linked to known laws', () => {
+    for (const id of ['cm-9', 'cm-17', 'cm-50', 'cm-193', 'cvrc-36', 'cprg-27', 'lt-24']) expect(ids.has(id), id).toBe(true)
+    expect(LAW_NAMES.CM.source).toMatch(/^https:/)
+    expect(LAW_NAMES.CVRC.source).toMatch(/^https:/)
+  })
   it('every scenario reference points to an existing article', () => {
     const missing: string[] = []
     for (const s of SCENARIOS) {

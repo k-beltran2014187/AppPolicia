@@ -9,9 +9,15 @@ create table if not exists public.profiles (
   second_name    text check (second_name is null or char_length(second_name) <= 40),
   first_surname  text not null check (char_length(first_surname) between 1 and 40),
   second_surname text check (second_surname is null or char_length(second_surname) <= 40),
-  phone          text not null unique check (phone ~ '^[0-9]{8}$'),
+  phone          text not null unique check (phone ~ '^[0-9]{7,15}$'),
   email          text not null,
-  dpi            text not null check (dpi ~ '^[0-9]{13}$'),
+  -- Documento de identidad: DPI (13 dígitos) o pasaporte (letras y números, 5 a 20).
+  id_type        text not null check (id_type in ('dpi','passport')),
+  id_number      text not null check (
+                   (id_type = 'dpi' and id_number ~ '^[0-9]{13}$') or
+                   (id_type = 'passport' and id_number ~ '^[A-Z0-9]{5,20}$')),
+  -- Nacionalidad: código de país ISO 3166-1 de dos letras (GT = guatemalteca).
+  nationality    text not null check (nationality ~ '^[A-Z]{2}$'),
   consent_at     timestamptz,
   created_at     timestamptz not null default now()
 );
@@ -48,7 +54,7 @@ create policy "settings_update_own" on public.user_settings
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  insert into public.profiles (id, first_name, second_name, first_surname, second_surname, phone, email, dpi, consent_at)
+  insert into public.profiles (id, first_name, second_name, first_surname, second_surname, phone, email, id_type, id_number, nationality, consent_at)
   values (
     new.id,
     trim(new.raw_user_meta_data->>'first_name'),
@@ -57,7 +63,9 @@ begin
     nullif(trim(coalesce(new.raw_user_meta_data->>'second_surname', '')), ''),
     trim(new.raw_user_meta_data->>'phone'),
     new.email,
-    trim(new.raw_user_meta_data->>'dpi'),
+    trim(new.raw_user_meta_data->>'id_type'),
+    upper(replace(replace(trim(new.raw_user_meta_data->>'id_number'), ' ', ''), '-', '')),
+    upper(trim(new.raw_user_meta_data->>'nationality')),
     nullif(new.raw_user_meta_data->>'consent_at', '')::timestamptz
   );
   return new;

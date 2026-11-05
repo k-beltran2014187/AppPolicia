@@ -9,6 +9,7 @@ import { Icon } from './icons'
 import { hasPin, quickExit, safe } from './privacy'
 import { AuthProvider, useAuth } from './auth'
 import { disableBio, hasBio } from './biometric'
+import { isForeignNationality } from './validate'
 import { applyTrusted, pullSettings, pushSettings, setSyncUser } from './sync'
 
 // Heavier or rarely used screens load on demand (faster first paint on slow phones).
@@ -21,10 +22,11 @@ const Chat = lazy(() => import('./views/Chat'))
 const Denuncia = lazy(() => import('./views/Denuncia'))
 const Account = lazy(() => import('./views/Account'))
 const Auth = lazy(() => import('./views/Auth'))
+const Foreign = lazy(() => import('./views/Foreign'))
 
 export type Role = 'civil' | 'officer'
 
-const KINDS = ['home', 'chat', 'laws', 'record', 'help', 'report', 'denuncia', 'account', 's'] as const
+const KINDS = ['home', 'chat', 'laws', 'record', 'help', 'report', 'denuncia', 'account', 'foreign', 's'] as const
 const parseView = () => {
   const raw = decodeURIComponent(window.location.hash.replace('#', '') || 'chat')
   const [kind, ...rest] = raw.split(':')
@@ -53,10 +55,14 @@ function AppInner() {
   const [ack, setAck] = useState(safe.get('poligt:ack') === '1')
   const [locked, setLocked] = useState(lockable())
   const [guest, setGuest] = useState(safe.get('poligt:guest') === '1')
+  const [foreignLocal, setForeignLocal] = useState(safe.get('poligt:foreigner') === '1')
   const [, bump] = useState(0)
   const synced = useRef(false)
   const uid = auth.user?.id
   const [menu, setMenu] = useState(false)
+  // Con cuenta, la nacionalidad del perfil decide; sin cuenta, la persona lo activa a mano.
+  const foreigner = auth.user ? isForeignNationality(auth.profile?.nationality) : foreignLocal
+  const setForeigner = (v: boolean) => { setForeignLocal(v); if (v) safe.set('poligt:foreigner', '1'); else safe.del('poligt:foreigner') }
 
   useEffect(() => { document.documentElement.lang = lang }, [lang])
   useEffect(() => {
@@ -104,12 +110,13 @@ function AppInner() {
 
   let page
   if (kind === 's') page = <Scenario id={arg} role={role} openArticle={open} />
-  else if (kind === 'chat') page = <Chat role={role} openArticle={open} go={go} />
+  else if (kind === 'chat') page = <Chat role={role} foreigner={foreigner} openArticle={open} go={go} />
   else if (kind === 'laws') page = <Laws key={arg} focus={arg} />
   else if (kind === 'record') page = <Record />
   else if (kind === 'help') page = <Help />
   else if (kind === 'report') page = <Report />
   else if (kind === 'denuncia') page = <Denuncia openArticle={open} />
+  else if (kind === 'foreign') page = <Foreign openArticle={open} go={go} canToggle={!auth.user} foreigner={foreigner} setForeigner={setForeigner} />
   else if (kind === 'account') page = <Account isGuest={guest} onLeaveGuest={leaveGuest} onLockChange={() => bump((n) => n + 1)} />
   else page = <Home role={role} setRole={setRole} go={go} />
 
@@ -148,7 +155,7 @@ function AppInner() {
           </ErrorBoundary>
         </main>
       </div>
-      <Drawer open={menu && !modal} onClose={() => setMenu(false)} kind={kind} go={go} role={role} setRole={setRole} lang={lang} setLang={setLang} canLock={lockable()} onLock={() => setLocked(true)} />
+      <Drawer open={menu && !modal} onClose={() => setMenu(false)} kind={kind} go={go} role={role} setRole={setRole} lang={lang} setLang={setLang} foreigner={foreigner} canLock={lockable()} onLock={() => setLocked(true)} />
       </>)}
       {locked && <LockScreen onUnlock={unlock} onFallback={auth.user ? fallback : undefined} />}
       {!ack && !locked && (

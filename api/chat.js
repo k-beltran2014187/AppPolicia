@@ -6,10 +6,11 @@ const UPSTREAM_TIMEOUT_MS = 25_000
 const RATE = { windowSec: 60, max: 12 }
 const VALID_IDS = new Set(ARTICLE_IDS)
 
-const SYSTEM_RULES = (role, lang) => `Eres el asesor virtual con IA de SOSgt: un asistente informativo, cercano y respetuoso (tutea, lenguaje sencillo, sin tecnicismos) para personas en Guatemala que son detenidas o revisadas por la PNC, la policía de tránsito (PNC) o la policía municipal de tránsito (EMETRA, PMT). También ayudas a agentes a conocer el fundamento legal de su actuación.
+const SYSTEM_RULES = (role, lang, foreigner) => `Eres el asesor virtual con IA de SOSgt: un asistente informativo, cercano y respetuoso (tutea, lenguaje sencillo, sin tecnicismos) para personas en Guatemala que son detenidas o revisadas por la PNC, la policía de tránsito (PNC) o la policía municipal de tránsito (EMETRA, PMT). También ayudas a agentes a conocer el fundamento legal de su actuación.
 
 Usuario actual: ${role === 'officer' ? 'AGENTE / OFICIAL (explica su fundamento legal y sus deberes)' : 'CIVIL / CONDUCTOR (explica sus derechos y deberes)'}.
 Responde en ${lang === 'en' ? 'inglés' : 'español sencillo de Guatemala'}.
+${foreigner ? 'La persona se declaró EXTRANJERA (no guatemalteca): además de lo general, prioriza y cita los artículos de la biblioteca para personas extranjeras (Código de Migración (ids que empiezan con cm-), Convención de Viena consular (cvrc-36), asilo (cprg-27), licencias extranjeras (lt-24)), menciona su derecho a que se avise a su consulado si lo pide, y recuerda que sin documentos migratorios la sanción es administrativa (la impone el IGM), no penal. Si ya no está seguro de su situación migratoria, sugiere consultar a su consulado o a un abogado.' : ''}
 
 REGLAS ESTRICTAS
 1. Solo afirma lo que respalde un artículo de la BIBLIOTECA de abajo. Cita cada afirmación legal con su id entre dobles corchetes, por ejemplo [[cprg-25]]. Usa únicamente ids que existan en la biblioteca.
@@ -78,6 +79,7 @@ export async function POST(request) {
   }
   const role = body?.role === 'officer' ? 'officer' : 'civil'
   const lang = body?.lang === 'en' ? 'en' : 'es'
+  const foreigner = body?.foreigner === true
   const messages = sanitizeMessages(body?.messages)
   if (!messages) return json({ error: 'bad_request' }, 400)
 
@@ -92,7 +94,7 @@ export async function POST(request) {
         stream: true,
         // The library is identical on every request, so it is cached (cheaper and faster).
         system: [
-          { type: 'text', text: SYSTEM_RULES(role, lang) },
+          { type: 'text', text: SYSTEM_RULES(role, lang, foreigner) },
           { type: 'text', text: `BIBLIOTECA\n${KNOWLEDGE}`, cache_control: { type: 'ephemeral' } },
         ],
         messages,

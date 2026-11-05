@@ -1,0 +1,172 @@
+import type { Article } from './laws'
+
+/**
+ * Normas aplicables a personas extranjeras en Guatemala.
+ * Fuentes: Código de Migración (Decreto 44-2016, publicado en el Diario de Centro América el 18-oct-2016),
+ * Convención de Viena sobre Relaciones Consulares (1963; Guatemala la ratificó), Constitución y Ley de Tránsito.
+ * Los resúmenes son nuestros; `quote` es texto de la fuente (solo se corrigen errores de lectura del PDF).
+ * AVISO: el texto del Código es el de 2016; pueden existir reformas posteriores que no se han verificado.
+ */
+export const FOREIGN: Article[] = [
+  {
+    id: 'cm-8', law: 'CM', art: '8',
+    title: { es: 'Derechos inherentes a la persona', en: 'Inherent rights of the person' },
+    summary: { es: 'Los derechos y garantías de las leyes del país y de los tratados ratificados por Guatemala se consideran incorporados al Código de Migración, aunque no aparezcan expresamente.', en: 'The rights and guarantees in national laws and in treaties ratified by Guatemala are deemed incorporated into the Migration Code even if not expressly listed.' },
+    quote: 'Los derechos y garantías que otorgan las leyes del país y los convenios y tratados internacionales ratificados por Guatemala, aunque no figuren de forma expresa en el presente Código, se consideran incorporados.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-9', law: 'CM', art: '9',
+    title: { es: 'No discriminación', en: 'Non-discrimination' },
+    summary: { es: 'Las personas migrantes deben ser tratadas igual y no pueden ser discriminadas por su nacionalidad, raza, idioma, religión u otra característica personal.', en: 'Migrants must be treated equally and may not be discriminated against because of nationality, race, language, religion or any other personal characteristic.' },
+    quote: 'Las personas migrantes deben ser tratadas igualitariamente y no podrán ser discriminadas por motivos de sexo, orientación sexual, raza, color, idioma, religión o convicción, opinión política o de otra índole origen étnico o social, nacionalidad, edad, situación económica, patrimonio, estado civil, nacimiento o cualquier característica personal.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-10', law: 'CM', art: '10',
+    title: { es: 'Derecho de protección del Estado', en: 'Right to State protection' },
+    summary: { es: 'El Estado debe proteger la vida, la integridad y la libertad de toda persona, nacional o extranjera, sin discriminar. No se pueden exigir documentos para darle la protección que necesita.', en: 'The State must protect the life, integrity and liberty of every person, national or foreign, without discrimination. Documents may not be demanded before giving the protection a person needs.' },
+    quote: 'El Estado de Guatemala, sin discriminación alguna, tiene la obligación de proteger la integridad personal, la vida y la libertad de toda persona nacional y extranjera que se encuentre en territorio nacional. Las instituciones del Estado no deberán exigir documentos de identificación o cualquier otro requisito, para brindar la protección requerida por una persona extranjera.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-17', law: 'CM', art: '17',
+    title: { es: 'Derecho a la información y a conservar sus documentos', en: 'Right to information and to keep your documents' },
+    summary: { es: 'La persona extranjera tiene derecho a recibir información sobre su situación. Las autoridades tienen prohibido confiscar, retener, destruir o alterar sus documentos de identidad o de viaje.', en: 'A foreign person has the right to information about their situation. Authorities are forbidden to confiscate, retain, destroy or alter their identity or travel documents.' },
+    quote: 'Toda persona extranjera o guatemalteca retornada tiene derecho a recibir la información necesaria sobre su situación, las gestiones que deben desarrollarse y toda aquella que tenga relación con su estatus o su persona. Está prohibido a las autoridades confiscar, retener, destruir, cambiar, alterar, ocultar, hacer por perdidos los documentos de identidad, viaje o personales de las personas migrantes.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-28', law: 'CM', art: '28',
+    title: { es: 'Comunicación con su consulado', en: 'Contact with your consulate' },
+    summary: { es: 'No se puede prohibir ni negar a un trabajador migratorio, a su familia o acompañantes comunicarse con los representantes consulares o diplomáticos de su país.', en: 'Migrant workers, their families or companions may not be prohibited or denied communication with the consular or diplomatic representatives of their country.' },
+    quote: 'Por ningún motivo puede prohibirse o negarse a los trabajadores migratorios y sus familias o acompañantes la comunicación con los representantes consulares o diplomáticos de sus países.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-62', law: 'CM', art: '62',
+    title: { es: 'Obligaciones de las personas extranjeras', en: 'Obligations of foreign persons' },
+    summary: { es: 'Las personas extranjeras deben respetar la Constitución, las leyes del país y las culturas y religiones que conviven en Guatemala.', en: 'Foreign persons must respect the Constitution, the laws of the country and the cultures and religions that coexist in Guatemala.' },
+    quote: 'Son obligaciones de las personas extranjeras en Guatemala, respetar la Constitución Política de la República de Guatemala, las leyes vigentes del país y las distintas cosmovisiones e identidades culturales y religiosas que conviven en el territorio nacional, en consonancia por ser un país multiétnico, plurilingüe y multicultural.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-64', law: 'CM', art: '64',
+    title: { es: 'Incumplimiento de obligaciones', en: 'Breach of obligations' },
+    summary: { es: 'Incumplir las obligaciones genera responsabilidad administrativa y puede llevar a la orden de abandonar el país o, en casos justificados, a la expulsión. Si hay un delito, se aplican las leyes penales.', en: 'Breaching obligations creates administrative liability and may lead to an order to leave the country or, in justified cases, expulsion. If a crime was committed, criminal law applies.' },
+    quote: 'El incumplimiento de las obligaciones de las personas extranjeras en Guatemala genera responsabilidad administrativa y permite solicitar el abandono inmediato del país, o en caso justificado determinar su expulsión. Sin embargo, cuando hayan cometido delito, la autoridad procederá conforme las leyes penales vigentes.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-100', law: 'CM', art: '100',
+    title: { es: 'Identificación de residentes temporales y permanentes', en: 'ID of temporary and permanent residents' },
+    summary: { es: 'Quien tiene residencia temporal o permanente se identifica con el Documento Personal de Identificación (DPI) que emite el RENAP.', en: 'Temporary and permanent residents identify themselves with the Personal Identification Document (DPI) issued by RENAP.' },
+    quote: 'Las personas que han obtenido el estatus de residentes temporales o permanentes, deberán identificarse con el Documento Personal de Identificación que les será extendido por el Registro Nacional de las Personas, de conformidad con las regulaciones específicas que sean emitidas por este Registro.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-101', law: 'CM', art: '101',
+    title: { es: 'Identidad en estatus extraordinario', en: 'ID under extraordinary status' },
+    summary: { es: 'Con permanencia provisional, el pasaporte es el documento de identidad. Con permanencia de atención especial, se acepta el pasaporte de origen mientras esté vigente y después el documento que autorice el RENAP.', en: 'With provisional stay, the passport is the identity document. With special-care stay, the passport of origin is valid until it expires and then the document authorized by RENAP.' },
+    quote: 'En el caso de las personas con estatus de permanencia provisional sus pasaportes serán el documento de identidad.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-107', law: 'CM', art: '107',
+    title: { es: 'Extranjero en situación irregular', en: 'Foreign person in irregular situation' },
+    summary: { es: 'Se considera en situación irregular a quien ingresó o vive en el país de buena fe y en forma pacífica pero no tiene un estatus migratorio ordinario.', en: 'A person who entered or lives in the country in good faith and peacefully but has no ordinary migration status is considered to be in an irregular situation.' },
+    quote: 'Se considera a una persona extranjera en situación irregular cuando ingresó o habita en el territorio nacional, de buena fe y de forma pacífica, pero que no cuenta con ninguno de los estatus ordinarios migratorios definidos por el presente Código.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-43', law: 'CM', art: '43',
+    title: { es: 'Refugio', en: 'Refugee status' },
+    summary: { es: 'Las personas extranjeras pueden pedir refugio a Guatemala al ingresar por un puesto migratorio oficial.', en: 'Foreign persons may request refuge from Guatemala when entering through an official migration post.' },
+    quote: 'Las personas extranjeras pueden solicitar refugio al Estado de Guatemala al momento de su ingreso al país en un puesto migratorio oficial.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-46', law: 'CM', art: '46',
+    title: { es: 'No devolución', en: 'Non-refoulement' },
+    summary: { es: 'Si se niega el refugio o el asilo, la persona no puede ser devuelta a un país donde su vida, integridad o libertad corran grave peligro; antes se debe avisar al ACNUR.', en: 'If refuge or asylum is denied, the person cannot be returned to a country where their life, integrity or liberty would be in grave danger; UNHCR must be notified first.' },
+    quote: 'Si se deniega el reconocimiento de estatuto de refugiado o asilado, la persona no podrá ser devuelta al país donde exista razón fundada de poner en grave peligro su vida, su integridad física y su libertad. El Estado de Guatemala, previo a la devolución, garantizará que la Oficina del Alto Comisionado de las Naciones Unidas para los Refugiados (ACNUR) ha sido puesta en conocimiento de la situación de la persona.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-50', law: 'CM', art: '50',
+    title: { es: 'Sin sanción penal por falta de documentos', en: 'No criminal penalty for lacking documents' },
+    summary: { es: 'No tener documentos o no haber cumplido los requisitos administrativos de ingreso no justifica una sanción penal; sí pueden cobrarse gastos administrativos y devolver a la persona a su país de procedencia.', en: 'Lacking documents or administrative entry requirements does not justify a criminal penalty; administrative costs may be charged and the person returned to the country of origin.' },
+    quote: 'El no contar con documentos de identidad y de viaje, o no haber cumplido los requisitos administrativos de ingreso, estancia o tránsito dentro del país no justifica la imposición de sanción penal.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-180', law: 'CM', art: '180',
+    title: { es: 'Abogado e intérprete en el trámite de refugio', en: 'Lawyer and interpreter in refugee proceedings' },
+    summary: { es: 'Quien solicita refugio tiene derecho a asistencia de abogado y de intérprete o traductor en todas las fases del trámite.', en: 'Refugee applicants have the right to a lawyer and an interpreter or translator in all phases of the procedure.' },
+    quote: 'Se reconoce el derecho de las personas solicitantes de contar con la debida asistencia letrada y de intérprete o traductor en todas las fases del procedimiento para la determinación de la condición de refugiado.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-193', law: 'CM', art: '193',
+    title: { es: 'Faltas administrativas de personas extranjeras', en: 'Administrative offenses by foreign persons' },
+    summary: { es: 'Son faltas: no presentar el documento de identidad o de viaje, quedarse más tiempo del autorizado, no avisar cambios de domicilio, trabajar o comerciar sin autorización o ingresar por lugares no autorizados.', en: 'Offenses include: not presenting identity or travel documents, overstaying, not reporting a change of address, working or trading without authorization, or entering through unauthorized places.' },
+    quote: 'No presentar ante la autoridad guatemalteca su documento de identidad internacional de viaje. Debe observarse el principio de no sanción a los solicitantes del reconocimiento del estatuto de refugiado o asilado político por no portar documento de identidad personal.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-194', law: 'CM', art: '194',
+    title: { es: 'Multas', en: 'Fines' },
+    summary: { es: 'Multa de Q200 por no presentar el documento de identidad o de viaje y de Q15 por cada día de exceso de permanencia. Las multas pueden pagarse en dólares.', en: 'A fine of Q200 for not presenting identity or travel documents and Q15 per day of overstay. Fines may be paid in US dollars.' },
+    quote: 'Por no presentar su documento de identidad internacional y de viaje, multa de doscientos Quetzales.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-195', law: 'CM', art: '195',
+    title: { es: 'Orden de abandono del país', en: 'Order to leave the country' },
+    summary: { es: 'Además de multas puede ordenarse abandonar el país en un plazo no mayor de diez días. La impone el Instituto Guatemalteco de Migración, no la policía.', en: 'Besides fines, an order to leave the country within ten days may be issued. It is imposed by the Guatemalan Migration Institute, not by the police.' },
+    quote: 'Esta sanción de tipo administrativa es impuesta por el Instituto Guatemalteco de Migración, mediante su órgano competente.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-196', law: 'CM', art: '196',
+    title: { es: 'Derecho a recurrir la sanción', en: 'Right to appeal the sanction' },
+    summary: { es: 'Quien es sancionado puede impugnar la decisión con el recurso de reposición.', en: 'A sanctioned person may challenge the decision through a motion for reconsideration (recurso de reposición).' },
+    quote: 'Las personas sancionadas tienen derecho a recurrir la decisión mediante el recurso de reposición indicado en el artículo 182 del presente Código.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-197', law: 'CM', art: '197',
+    title: { es: 'Sanción administrativa y sanción penal son distintas', en: 'Administrative and criminal sanctions are separate' },
+    summary: { es: 'Las sanciones administrativas migratorias son distintas de las penales, que solo proceden por delitos y mediante un proceso penal.', en: 'Administrative migration sanctions are separate from criminal ones, which apply only to crimes and through a criminal proceeding.' },
+    quote: 'La sanción administrativa es distinta a la sanción penal, la cual será aplicable en los casos de comisión de delitos y como resultado del proceso penal establecido en la legislación del país por las autoridades correspondientes.',
+    verified: 'leido',
+  },
+  {
+    id: 'cm-205', law: 'CM', art: '205',
+    title: { es: 'Amparo y exhibición personal a favor de migrantes', en: 'Amparo and habeas corpus for migrants' },
+    summary: { es: 'Cualquier persona, guatemalteca o no, puede pedir amparo o exhibición personal a favor de una persona migrante extranjera.', en: 'Anyone, Guatemalan or not, may file an amparo or habeas corpus on behalf of a foreign migrant.' },
+    quote: 'Cualquier persona, guatemalteca o no, puede presentar amparo o solicitar exhibición personal a favor de personas migrantes extranjeras para que se les restituya su derecho o cese una violación en su contra.',
+    verified: 'leido',
+  },
+  {
+    id: 'cvrc-36', law: 'CVRC', art: '36',
+    title: { es: 'Aviso y comunicación con el consulado', en: 'Notification and contact with the consulate' },
+    summary: { es: 'Si un extranjero es arrestado o detenido y lo pide, las autoridades deben avisar sin demora a su consulado y trasmitirle sus comunicaciones, e informarle de este derecho. Los cónsules pueden visitarlo y organizar su defensa.', en: 'If a foreign national is arrested or detained and asks for it, the authorities must inform their consulate without delay, pass on their communications, and inform them of this right. Consuls may visit them and arrange their defense.' },
+    quote: 'Si el interesado lo solicita, las autoridades competentes del Estado receptor deberán informar sin retraso alguno a la oficina consular competente en ese Estado cuando, en su circunscripción, un nacional del Estado que envía sea arrestado de cualquier forma, detenido o puesto en prisión preventiva. Cualquier comunicación dirigida a la oficina consular por la persona arrestada, detenida o puesta en prisión preventiva, le será asimismo transmitida sin demora por dichas autoridades, las cuales habrán de informar sin dilación a la persona interesada acerca de los derechos que se le reconocen en este apartado.',
+    verified: 'leido',
+  },
+  {
+    id: 'cprg-27', law: 'CPRG', art: '27',
+    title: { es: 'Derecho de asilo', en: 'Right of asylum' },
+    summary: { es: 'Guatemala reconoce el derecho de asilo. No se expulsa a un refugiado político hacia el país que lo persigue.', en: 'Guatemala recognizes the right of asylum. A political refugee may not be expelled to the country that persecutes them.' },
+    quote: 'Guatemala reconoce el derecho de asilo y lo otorga de acuerdo con las prácticas internacionales. No se acordará la expulsión del territorio nacional de un refugiado político, con destino al país que lo persigue.',
+    verified: 'leido',
+  },
+  {
+    id: 'lt-24', law: 'LT', art: '24',
+    title: { es: 'Licencias de conducir extranjeras', en: 'Foreign driver licenses' },
+    summary: { es: 'Quien tiene licencia extranjera puede conducir en Guatemala los vehículos que su licencia permite, mientras esté vigente su autorización migratoria. Si se hace residente, debe traspasarla a una guatemalteca.', en: 'Holders of a foreign license may drive in Guatemala the vehicles it covers while their migration authorization is valid. If they become residents they must convert it to a Guatemalan license.' },
+    quote: 'Los titulares de licencia de conducir extranjeras tienen permitido conducir en el territorio nacional, vehículos para los cuales están habilitados por la misma y sólo hasta que esté vigente su autorización migratoria. En caso de residencia en el país, es obligatorio el traspaso de su licencia extranjera a una nacional, del mismo tipo o inferior, pero nunca superior.',
+    verified: 'leido',
+  },
+]

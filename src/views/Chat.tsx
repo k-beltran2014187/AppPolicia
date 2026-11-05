@@ -27,6 +27,14 @@ const SUGGESTIONS: L[] = [
   { es: '¿Cómo denuncio a un policía que abusó?', en: 'How do I report an officer who abused me?' },
 ]
 
+const FOREIGN_SUGGESTIONS: L[] = [
+  { es: 'Soy extranjero y me pidieron mis documentos, ¿qué debo mostrar?', en: 'I am a foreign national and was asked for my documents, what must I show?' },
+  { es: '¿Pueden quedarse con mi pasaporte?', en: 'Can they keep my passport?' },
+  { es: 'Me detuvieron, ¿puedo llamar a mi consulado?', en: 'I was detained, can I call my consulate?' },
+  { es: '¿Pueden detenerme por no tener documentos migratorios?', en: 'Can they arrest me for lacking migration documents?' },
+  { es: '¿Puedo conducir con mi licencia extranjera?', en: 'Can I drive with my foreign license?' },
+]
+
 // The conversation is sensitive: it lives only in this tab (sessionStorage) and vanishes when it closes.
 const STORE = 'poligt:chat'
 const load = (): Msg[] => {
@@ -65,7 +73,7 @@ const CALLS: { tel: string; show: string; name: L }[] = [
   { tel: '1531', show: '1531', name: { es: 'Denuncia policial (anónima)', en: 'Police misconduct (anonymous)' } },
 ]
 
-export default function Chat({ role, openArticle, go }: { role: Role; openArticle: (id: string) => void; go: (v: string) => void }) {
+export default function Chat({ role, foreigner, openArticle, go }: { role: Role; foreigner: boolean; openArticle: (id: string) => void; go: (v: string) => void }) {
   const { lang } = useLang()
   const [msgs, setMsgs] = useState<Msg[]>(load)
   const [input, setInput] = useState('')
@@ -138,6 +146,7 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
         body: JSON.stringify({
           role,
           lang,
+          foreigner,
           messages: next.filter((m) => !m.offline && !m.error && !m.note).map(({ role, content }) => ({ role, content })),
         }),
       })
@@ -244,7 +253,7 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
             <h1>{tr(UI.greeting, lang)}</h1>
             <p className="lead">{tr(UI.greetingSub, lang)}</p>
             <div className="suggestions">
-              {SUGGESTIONS.map((s, i) => (
+              {(foreigner ? FOREIGN_SUGGESTIONS : SUGGESTIONS).map((s, i) => (
                 <button key={i} className="suggest" onClick={() => send(tr(s, lang))}>{tr(s, lang)}</button>
               ))}
             </div>

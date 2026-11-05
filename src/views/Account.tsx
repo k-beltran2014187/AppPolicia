@@ -4,7 +4,7 @@ import { useAuth } from '../auth'
 import { Icon } from '../icons'
 import { bioAvailable, disableBio, enableBio, hasBio } from '../biometric'
 import { wipeAll } from '../privacy'
-import { maskDpi } from '../validate'
+import { countryOptions, maskId } from '../validate'
 import Legal from './Legal'
 
 const T = {
@@ -16,6 +16,8 @@ const T = {
   phone: { es: 'Celular', en: 'Phone' },
   email: { es: 'Correo', en: 'Email' },
   dpi: { es: 'DPI', en: 'DPI' },
+  passport: { es: 'Pasaporte', en: 'Passport' },
+  nationality: { es: 'Nacionalidad', en: 'Nationality' },
   bioTitle: { es: 'Entrar con rostro o huella', en: 'Sign in with face or fingerprint' },
   bioSub: { es: 'Tu teléfono verifica quién eres. SOSgt nunca recibe ni guarda tu rostro ni tu huella. Tu sesión sigue abierta en este teléfono.', en: 'Your phone verifies who you are. SOSgt never receives or stores your face or fingerprint. Your session stays open on this phone.' },
   bioOn: { es: 'Activado', en: 'On' },
@@ -89,7 +91,8 @@ export default function Account({ isGuest, onLeaveGuest, onLockChange }: Props) 
           <dt>{t('name')}</dt><dd>{fullName || '…'}</dd>
           <dt>{t('phone')}</dt><dd>{p?.phone ?? '…'}</dd>
           <dt>{t('email')}</dt><dd>{p?.email ?? auth.user.email}</dd>
-          {p && <><dt>{t('dpi')}</dt><dd>{maskDpi(p.dpi)}</dd></>}
+          {p && <><dt>{t('nationality')}</dt><dd>{countryOptions(lang).find((c) => c.code === p.nationality)?.name ?? p.nationality}</dd></>}
+          {p && <><dt>{t(p.id_type === 'passport' ? 'passport' : 'dpi')}</dt><dd>{maskId(p.id_number)}</dd></>}
         </dl>
       </section>
 

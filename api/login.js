@@ -34,7 +34,7 @@ export async function POST(request) {
 
   const phone = typeof body?.phone === 'string' ? body.phone.replace(/\D/g, '') : ''
   const password = typeof body?.password === 'string' ? body.password : ''
-  if (!/^\d{8}$/.test(phone) || !password || password.length > 200) return json({ error: 'invalid' }, 401)
+  if (!/^\d{7,15}$/.test(phone) || !password || password.length > 200) return json({ error: 'invalid' }, 401)
 
   // Límite por IP y por número, contra adivinar contraseñas.
   if (limited(`ip:${clientIp(request)}`, 15, 60_000) || limited(`ph:${phone}`, 6, 60_000)) return json({ error: 'rate_limited' }, 429)

@@ -14,11 +14,11 @@ function Es() {
       <p className="small muted">Última actualización: noviembre de 2026. Borrador pendiente de revisión por un abogado.</p>
       <h2>Qué datos pedimos</h2>
       <ul>
-        <li><strong>Para crear tu cuenta:</strong> primer y segundo nombre, primer y segundo apellido, celular, correo electrónico, DPI y contraseña.</li>
+        <li><strong>Para crear tu cuenta:</strong> primer y segundo nombre, primer y segundo apellido, celular, correo electrónico, nacionalidad, documento de identidad (DPI o pasaporte) y contraseña.</li>
         <li><strong>Ajustes:</strong> idioma, tipo de usuario (conductor o agente) y, si lo escribes, el número de tu contacto de confianza.</li>
       </ul>
       <h2>Para qué los usamos</h2>
-      <p>Para crear y proteger tu cuenta, permitirte entrar con tu correo o celular, y recuperar tus ajustes en otro teléfono. El DPI se usa solo para identificarte como titular de la cuenta. No vendemos tus datos, no hacemos publicidad con ellos y no los compartimos con terceros, salvo los proveedores técnicos indicados abajo.</p>
+      <p>Para crear y proteger tu cuenta, permitirte entrar con tu correo o celular, y recuperar tus ajustes en otro teléfono. El documento de identidad se usa solo para identificarte como titular de la cuenta; la nacionalidad se usa para personalizar la información (por ejemplo, mostrar las leyes para personas extranjeras). No vendemos tus datos, no hacemos publicidad con ellos y no los compartimos con terceros, salvo los proveedores técnicos indicados abajo.</p>
       <h2>Lo que se queda solo en tu teléfono</h2>
       <p>Tus fotos, videos, audios, el informe y el historial del chat se guardan únicamente en tu teléfono. No se suben a nuestros servidores.</p>
       <h2>Asesor virtual con IA</h2>
@@ -58,11 +58,11 @@ function En() {
       <p className="small muted">Last updated: November 2026. Draft pending review by a lawyer.</p>
       <h2>What we ask for</h2>
       <ul>
-        <li><strong>To create your account:</strong> first and second name, first and second surname, mobile phone, email, DPI (national ID) and password.</li>
+        <li><strong>To create your account:</strong> first and second name, first and second surname, mobile phone, email, nationality, identity document (DPI or passport) and password.</li>
         <li><strong>Settings:</strong> language, user type (driver or officer) and, if you enter it, your trusted contact's number.</li>
       </ul>
       <h2>What we use it for</h2>
-      <p>To create and protect your account, let you sign in with your email or phone, and restore your settings on another phone. The DPI is used only to identify you as the account holder. We do not sell your data, use it for advertising, or share it with third parties other than the technical providers listed below.</p>
+      <p>To create and protect your account, let you sign in with your email or phone, and restore your settings on another phone. The identity document is used only to identify you as the account holder; your nationality is used to personalize the information (for example, to show the laws for foreign persons). We do not sell your data, use it for advertising, or share it with third parties other than the technical providers listed below.</p>
       <h2>What stays only on your phone</h2>
       <p>Your photos, videos, audio, report and chat history are stored only on your phone. They are not uploaded to our servers.</p>
       <h2>AI advisor</h2>
