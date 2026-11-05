@@ -332,6 +332,9 @@ img.photo { width: 100%; border-radius: var(--r-sm); display: block; margin-bott
 
 /* v5 — marca SOSgt */
 .logo { gap: 9px; }
-.logo-svg { display: block; flex: none; border-radius: 9px; }
+.logo-svg { display: block; flex: none; }
+.logo-pin { fill: #12356b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo-pin { fill: #7fb2ef; } }
+:root[data-theme="dark"] .logo-pin { fill: #7fb2ef; }
 .wordmark { font-weight: 900; letter-spacing: -.02em; }
-.wordmark-gt { color: #b7791f; margin-left: 1px; }
+.wordmark-gt { color: #b7791f; font-style: italic; margin-left: 1px; }

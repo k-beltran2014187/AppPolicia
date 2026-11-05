@@ -1,15 +1,11 @@
-/** Marca SOSgt: escudo con "SOS" y la palabra. Mismo dibujo que public/favicon.svg. */
+/** Marca SOSgt: pin de ubicación con escudo y check. Mismo dibujo que public/favicon.svg. */
 export function LogoMark({ size = 32 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" className="logo-svg">
-      <rect width="64" height="64" rx="16" fill="#12356b" />
-      <path d="M32 8 11 16v15c0 12 9 20 21 24 12-4 21-12 21-23V16z" fill="#fff" />
-      <g fill="none" stroke="#0b2545" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 26.3C21.8 23.8 16.5 24.6 16.5 28.2c0 3.6 7.5 3 7.5 7.4 0 3.9-5.6 4.4-7.9 1.9" />
-        <ellipse cx="32" cy="32" rx="3.9" ry="6.9" />
-        <path d="M47 26.3C44.8 23.8 39.5 24.6 39.5 28.2c0 3.6 7.5 3 7.5 7.4 0 3.9-5.6 4.4-7.9 1.9" />
-      </g>
-      <path d="M25 45.5h14" stroke="#b7791f" strokeWidth="3.4" strokeLinecap="round" />
+      <path className="logo-pin" d="M32 59C20 45 12 36.5 12 24a20 20 0 0 1 40 0c0 12.5-8 21-20 35z" />
+      <circle cx="32" cy="24" r="11.5" fill="#fff" />
+      <path className="logo-pin" d="M32 16.5l7 2.6v5c0 4.3-3 6.9-7 8.6-4-1.7-7-4.3-7-8.6v-5z" />
+      <path d="M28.5 24.5l2.6 2.6 4.5-5" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
