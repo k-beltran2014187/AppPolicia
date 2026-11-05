@@ -3,7 +3,7 @@ import { UI, tr, useLang, type L } from '../i18n'
 import { ARTICLES, LAW_NAMES } from '../data/laws'
 import type { Role } from '../App'
 import { Icon } from '../icons'
-import Mike from '../Mike'
+import { Logo, LogoMark } from '../Logo'
 import { cleanAnswer, localSearch } from '../search'
 import { savePhoto } from '../db'
 import { safe } from '../privacy'
@@ -220,9 +220,9 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
   return (
     <div className="chat">
       <div className="chat-bar">
-        <Mike size={34} />
+        <LogoMark size={30} />
         <div>
-          <strong>Mike</strong>
+          <strong>SOSgt</strong>
           <span className="small muted">{tr(UI.mikeRole, lang)}</span>
         </div>
         {canSpeak() && (
@@ -240,7 +240,7 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
       <div className="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
         {msgs.length === 0 && (
           <div className="chat-empty">
-            <Mike size={60} />
+            <Logo height={64} />
             <h1>{tr(UI.greeting, lang)}</h1>
             <p className="lead">{tr(UI.greetingSub, lang)}</p>
             <div className="suggestions">
@@ -259,7 +259,7 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
             </div>
           ) : (
             <div key={i} className={`bubble ${m.role}`}>
-              {m.role === 'assistant' && <span className="bubble-who"><Mike size={20} /> Mike</span>}
+              {m.role === 'assistant' && <span className="bubble-who"><LogoMark size={18} /> SOSgt</span>}
               {m.offline && <span className="tag pend">{tr(UI.offlineTag, lang)}</span>}
               <Rich text={m.content} />
               {!!m.cites?.length && <span className="src-label">{tr(UI.legalBasis, lang)}</span>}
@@ -277,7 +277,7 @@ export default function Chat({ role, openArticle, go }: { role: Role; openArticl
         )}
         {busy && !msgs.at(-1)?.role.startsWith('assistant') && (
           <div className="bubble assistant">
-            <span className="bubble-who"><Mike size={20} /> Mike</span>
+            <span className="bubble-who"><LogoMark size={18} /> SOSgt</span>
             <span className="typing" aria-label={tr(UI.thinking, lang)}><i /><i /><i /></span>
           </div>
         )}

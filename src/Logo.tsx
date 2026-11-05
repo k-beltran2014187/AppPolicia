@@ -13,3 +13,12 @@ export function LogoMark({ size = 32 }: { size?: number }) {
 export function Wordmark() {
   return <span className="wordmark">SOS<span className="wordmark-gt">gt</span></span>
 }
+/** Logotipo completo SOSgt (PNG con transparencia). Hay una versión clara y otra oscura. */
+export function Logo({ height = 30 }: { height?: number }) {
+  return (
+    <span className="lockup" role="img" aria-label="SOSgt" style={{ height }}>
+      <img className="lg-light" src="./logo-sosgt.png" alt="" height={height} decoding="async" />
+      <img className="lg-dark" src="./logo-sosgt-dark.png" alt="" height={height} decoding="async" />
+    </span>
+  )
+}

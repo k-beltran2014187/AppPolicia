@@ -3,7 +3,6 @@ import { SCENARIOS } from '../data/scenarios'
 import { ARTICLES } from '../data/laws'
 import type { Role } from '../App'
 import { Icon } from '../icons'
-import Mike from '../Mike'
 
 interface Props {
   role: Role
@@ -26,7 +25,7 @@ export default function Home({ role, setRole, go }: Props) {
       </div>
 
       <button className="sos" onClick={() => go('chat')}>
-        <span className="sos-who"><Mike size={44} /> Mike · {tr(UI.mikeRole, lang)}</span>
+        <span className="sos-who">{tr(UI.mikeRole, lang)}</span>
         <span className="sos-title">{tr(UI.askBtn, lang)}</span>
         <span className="sos-sub">{tr(UI.askSub, lang)}</span>
         <span className="sos-go"><Icon name="arrow" size={24} /></span>

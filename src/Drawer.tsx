@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { UI, tr, type Lang, type L } from './i18n'
 import { Icon, type IconName } from './icons'
 import type { Role } from './App'
-import { LogoMark, Wordmark } from './Logo'
+import { Logo } from './Logo'
 
 interface Props {
   open: boolean
@@ -46,7 +46,7 @@ export default function Drawer({ open, onClose, kind, go, role, setRole, lang, s
       <div className="drawer-scrim" onClick={onClose} />
       <aside className="drawer" role="dialog" aria-modal="true" aria-label={tr(UI.menu, lang)}>
         <div className="drawer-head">
-          <span className="logo"><LogoMark size={34} /><Wordmark /></span>
+          <span className="logo"><Logo height={34} /></span>
           <button ref={closeBtn} className="back" onClick={onClose} aria-label={tr(UI.closeMenu, lang)}><Icon name="x" size={22} /></button>
         </div>
         <nav className="drawer-nav" aria-label={tr(UI.menu, lang)}>

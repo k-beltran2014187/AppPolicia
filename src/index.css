@@ -338,3 +338,12 @@ img.photo { width: 100%; border-radius: var(--r-sm); display: block; margin-bott
 :root[data-theme="dark"] .logo-pin { fill: #7fb2ef; }
 .wordmark { font-weight: 900; letter-spacing: -.02em; }
 .wordmark-gt { color: #b7791f; font-style: italic; margin-left: 1px; }
+
+/* v6 — logotipo completo, sin avatar */
+.lockup { display: inline-flex; align-items: center; }
+.lockup img { display: block; width: auto; height: 100%; }
+.lg-dark { display: none !important; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .lg-light { display: none !important; } :root:not([data-theme="light"]) .lg-dark { display: block !important; } }
+:root[data-theme="dark"] .lg-light { display: none !important; }
+:root[data-theme="dark"] .lg-dark { display: block !important; }
+.chat-empty .lockup { margin-bottom: 4px; }
