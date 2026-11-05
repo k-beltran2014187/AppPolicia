@@ -25,6 +25,7 @@ const ITEMS: { id: string; icon: IconName; label: L }[] = [
   { id: 'record', icon: 'record', label: UI.record },
   { id: 'report', icon: 'report', label: UI.report },
   { id: 'help', icon: 'help', label: UI.help },
+  { id: 'account', icon: 'user', label: { es: 'Mi cuenta', en: 'My account' } },
 ]
 
 export default function Drawer({ open, onClose, kind, go, role, setRole, lang, setLang, canLock, onLock }: Props) {

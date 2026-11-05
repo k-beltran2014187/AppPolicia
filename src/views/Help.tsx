@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { UI, tr, useLang, type L } from '../i18n'
 import { Icon } from '../icons'
 import { clearPin, hasPin, safe, setPin, wipeAll } from '../privacy'
+import { pushSettings } from '../sync'
 
 // Verify these numbers with the official sources before relying on them (the screen says so too).
 const CONTACTS: { name: L; desc: L; tel: string }[] = [
@@ -19,6 +20,7 @@ function Location() {
   const saveTrusted = (v: string) => {
     setTrusted(v)
     safe.set('poligt:trusted', v)
+    pushSettings({ trusted_contact: v })
   }
   const locate = () => {
     if (!navigator.geolocation) return setState('failed')

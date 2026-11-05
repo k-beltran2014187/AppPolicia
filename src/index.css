@@ -347,3 +347,24 @@ img.photo { width: 100%; border-radius: var(--r-sm); display: block; margin-bott
 :root[data-theme="dark"] .lg-light { display: none !important; }
 :root[data-theme="dark"] .lg-dark { display: block !important; }
 .chat-empty .lockup { margin-bottom: 4px; }
+
+/* v7 — cuentas: registro, login, cuenta, política */
+.auth { min-height: 100dvh; display: grid; place-items: start center; padding: max(24px, env(safe-area-inset-top)) 16px 40px; background: var(--bg); }
+.auth-card { width: min(440px, 100%); background: var(--card); border-radius: var(--r); padding: 24px 20px; box-shadow: 0 8px 28px rgba(11,37,69,.08); }
+.auth-logo { display: flex; justify-content: center; margin-bottom: 4px; }
+.auth h1 { font-size: 1.5rem; margin: 0; }
+.field-err { color: var(--bad); font-weight: 600; font-size: .8125rem; }
+.ok-note { color: var(--good); font-weight: 600; margin: 0; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; line-height: 1.4; }
+.check input { width: 22px; height: 22px; margin-top: 1px; flex: none; accent-color: var(--accent); }
+.pw-wrap { position: relative; display: block; }
+.pw-wrap .field { padding-right: 84px; }
+.pw-toggle { position: absolute; right: 4px; top: 4px; }
+.sep { border: 0; border-top: 1px solid var(--line); margin: 4px 0; width: 100%; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin: 0; }
+.kv dt { color: var(--muted); font-size: .85rem; }
+.kv dd { margin: 0; font-weight: 600; word-break: break-word; }
+.legal h1 { font-size: 1.35rem; }
+.legal h2 { font-size: 1.05rem; margin: 12px 0 0; }
+.legal ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.legal p { margin: 0; line-height: 1.5; }

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { LangContext, UI, tr, type Lang } from './i18n'
 import Home from './views/Home'
 import Drawer from './Drawer'
@@ -7,6 +7,9 @@ import ErrorBoundary from './ErrorBoundary'
 import LockScreen from './LockScreen'
 import { Icon } from './icons'
 import { hasPin, quickExit, safe } from './privacy'
+import { AuthProvider, useAuth } from './auth'
+import { disableBio, hasBio } from './biometric'
+import { applyTrusted, pullSettings, pushSettings, setSyncUser } from './sync'
 
 // Heavier or rarely used screens load on demand (faster first paint on slow phones).
 const Scenario = lazy(() => import('./views/Scenario'))
@@ -16,10 +19,12 @@ const Help = lazy(() => import('./views/Help'))
 const Report = lazy(() => import('./views/Report'))
 const Chat = lazy(() => import('./views/Chat'))
 const Denuncia = lazy(() => import('./views/Denuncia'))
+const Account = lazy(() => import('./views/Account'))
+const Auth = lazy(() => import('./views/Auth'))
 
 export type Role = 'civil' | 'officer'
 
-const KINDS = ['home', 'chat', 'laws', 'record', 'help', 'report', 'denuncia', 's'] as const
+const KINDS = ['home', 'chat', 'laws', 'record', 'help', 'report', 'denuncia', 'account', 's'] as const
 const parseView = () => {
   const raw = decodeURIComponent(window.location.hash.replace('#', '') || 'chat')
   const [kind, ...rest] = raw.split(':')
@@ -30,12 +35,27 @@ const parseView = () => {
 const asLang = (v: string): Lang => (v === 'en' ? 'en' : 'es')
 const asRole = (v: string): Role => (v === 'officer' ? 'officer' : 'civil')
 
+const lockable = () => hasPin() || hasBio()
+
 export default function App() {
+  return (
+    <AuthProvider>
+      <AppInner />
+    </AuthProvider>
+  )
+}
+
+function AppInner() {
+  const auth = useAuth()
   const [lang, setLangState] = useState<Lang>(() => asLang(safe.get('poligt:lang', 'es')))
   const [role, setRoleState] = useState<Role>(() => asRole(safe.get('poligt:role', 'civil')))
   const [view, setView] = useState(parseView)
   const [ack, setAck] = useState(safe.get('poligt:ack') === '1')
-  const [locked, setLocked] = useState(hasPin())
+  const [locked, setLocked] = useState(lockable())
+  const [guest, setGuest] = useState(safe.get('poligt:guest') === '1')
+  const [, bump] = useState(0)
+  const synced = useRef(false)
+  const uid = auth.user?.id
   const [menu, setMenu] = useState(false)
 
   useEffect(() => { document.documentElement.lang = lang }, [lang])
@@ -46,15 +66,38 @@ export default function App() {
   }, [])
   // Re-lock when the app goes to the background.
   useEffect(() => {
-    const on = () => { if (document.hidden && hasPin()) setLocked(true) }
+    const on = () => { if (document.hidden && lockable()) setLocked(true) }
     document.addEventListener('visibilitychange', on)
     return () => document.removeEventListener('visibilitychange', on)
   }, [])
   useEffect(() => { window.scrollTo(0, 0) }, [view.kind, view.arg])
 
+  // Con una sesión abierta ya no se está en modo invitado; al entrar se traen los ajustes guardados en la nube.
+  useEffect(() => {
+    synced.current = false
+    setSyncUser(uid ?? '')
+    if (!uid) return
+    if (safe.get('poligt:guest')) { safe.del('poligt:guest'); setGuest(false) }
+    let alive = true
+    pullSettings(uid).then((s) => {
+      if (!alive) return
+      if (s) {
+        if (s.lang) { setLangState(asLang(s.lang)); safe.set('poligt:lang', s.lang) }
+        if (s.role) { setRoleState(asRole(s.role)); safe.set('poligt:role', s.role) }
+        applyTrusted(s.trusted_contact)
+      } else {
+        pushSettings({ lang: asLang(safe.get('poligt:lang', 'es')), role: asRole(safe.get('poligt:role', 'civil')), trusted_contact: safe.get('poligt:trusted') })
+      }
+      synced.current = true
+    })
+    return () => { alive = false }
+  }, [uid])
+
   const go = (v: string) => { window.location.hash = v }
-  const setLang = (l: Lang) => { setLangState(l); safe.set('poligt:lang', l) }
-  const setRole = (r: Role) => { setRoleState(r); safe.set('poligt:role', r) }
+  const setLang = (l: Lang) => { setLangState(l); safe.set('poligt:lang', l); if (synced.current) pushSettings({ lang: l }) }
+  const setRole = (r: Role) => { setRoleState(r); safe.set('poligt:role', r); if (synced.current) pushSettings({ role: r }) }
+  const enterGuest = () => { safe.set('poligt:guest', '1'); setGuest(true) }
+  const leaveGuest = () => { safe.del('poligt:guest'); setGuest(false) }
   const open = (id: string) => go(`laws:${id}`)
 
   const { kind, arg } = view
@@ -67,12 +110,22 @@ export default function App() {
   else if (kind === 'help') page = <Help />
   else if (kind === 'report') page = <Report />
   else if (kind === 'denuncia') page = <Denuncia openArticle={open} />
+  else if (kind === 'account') page = <Account isGuest={guest} onLeaveGuest={leaveGuest} onLockChange={() => bump((n) => n + 1)} />
   else page = <Home role={role} setRole={setRole} go={go} />
 
   const modal = !ack || locked
+  const unlock = useCallback(() => setLocked(false), [])
+  const needAuth = auth.enabled && auth.ready && ((!auth.user && !guest) || auth.recovery)
+  const authLoading = auth.enabled && !auth.ready
+  const fallback = () => { disableBio(); setLocked(lockable()); void auth.signOut() }
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>
+      {authLoading ? (
+        <div className="auth"><div className="auth-card center"><Logo height={56} /></div></div>
+      ) : needAuth ? (
+        <div inert={modal}><Suspense fallback={null}><Auth onGuest={enterGuest} /></Suspense></div>
+      ) : (<>
       {/* While a dialog is open the page behind it cannot be focused or read by assistive tech. */}
       <div inert={modal || menu}>
         <header className="top">
@@ -95,8 +148,9 @@ export default function App() {
           </ErrorBoundary>
         </main>
       </div>
-      <Drawer open={menu && !modal} onClose={() => setMenu(false)} kind={kind} go={go} role={role} setRole={setRole} lang={lang} setLang={setLang} canLock={hasPin()} onLock={() => setLocked(true)} />
-      {locked && <LockScreen onUnlock={() => setLocked(false)} />}
+      <Drawer open={menu && !modal} onClose={() => setMenu(false)} kind={kind} go={go} role={role} setRole={setRole} lang={lang} setLang={setLang} canLock={lockable()} onLock={() => setLocked(true)} />
+      </>)}
+      {locked && <LockScreen onUnlock={unlock} onFallback={auth.user ? fallback : undefined} />}
       {!ack && !locked && (
         <div className="modal" role="dialog" aria-modal="true" aria-labelledby="ack-title">
           <div className="modal-box">
